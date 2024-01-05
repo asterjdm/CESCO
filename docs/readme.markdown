@@ -31,4 +31,4 @@ git clone https://github.com/asterjdm/cesco.git cesco
 
 
 
-[![Star History Chart](https://api.star-history.com/svg?repos=asterjdm/cesco&type=Date)](https://star-history.com/#bytebase/star-history&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=asterjdm/CescoV2&type=Date)](https://star-history.com/#bytebase/star-history&Date)
