@@ -1,0 +1,167 @@
+/* 
+.editor-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    backdrop-filter: blur(5px);
+    animation: fade-in 250ms ease-in-out;
+    z-index: 4;
+}
+
+.editor-popup.show {
+    display: flex;
+    animation: fade-in 250ms;
+}
+
+.editor-popup.closing {
+    animation: fade-out 250ms ease-in-out;
+}
+
+.editor-content {
+    z-index: 5;
+    position: relative;
+}
+
+.editor-close {
+    border-radius: var(--button-radius);
+    border: 2px solid rgb(0, 0, 0);
+    position: absolute;
+    top: -30px;
+    right: -40px;
+    height: 40px;
+    width: 40px;
+    box-shadow: 3px 3px 0px 0px black;
+    background: #ffffff;
+    transition: 100ms ease-in-out;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.editor-close:active {
+    box-shadow: none;
+    transform: translate(3px, 3px);
+}
+
+.main-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.new-area {
+    background-color: var(--standart-background);
+    padding: 10px;
+    border-radius: 10px 10px 0px 10px;
+    width: 500px;
+    height: 300px;
+    resize: none;
+    outline: none;
+    overflow-wrap: break-word;
+}
+div[data-placeholder]:not(:focus):not([data-div-placeholder-content]):before {
+    content: attr(data-placeholder);
+    color: #b3b3b3;
+}
+.text-length {
+    margin-top: 10px;
+    margin-bottom: 2px;
+    position: absolute;
+}
+.sub-area {
+    display: flex;
+    position: relative;
+}
+input[type="file"] {
+    display: none;
+}
+.sub-buttons {
+    border-top: 1px solid var(--standart-border);
+    right: 0;
+    position: absolute;
+    display: flex;
+
+}
+.sub-buttons .sub-button:nth-child(1) {
+    border-bottom-left-radius: 10px;
+}
+.sub-buttons .sub-button:last-child {
+    border-bottom-right-radius: 10px;
+}
+.sub-button {
+    padding: 5px;
+    border: 1px solid var(--standart-border);
+    width: 90px;
+    background: var(--standart-background);
+    margin: 0;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+.sub-button-text {
+    font-size: 14px;
+    text-align: center;
+}
+
+.send {
+    margin-top: 35px;
+    width: 100%;
+    height: 50px;
+    border-radius: 50px;
+    border: 2px solid black;
+    background: white;
+    box-shadow: 3px 3px;
+    transition: 100ms;
+
+
+}
+.send:active {
+    box-shadow: none;
+    transform: translate(3px, 3px);
+}
+.img-preview{
+    border-radius: 10px;
+    border: solid white;
+}
+
+
+@media screen and (max-width: 700px) {
+    .editor-close {
+        top: -50px;
+        right: 0px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .main-form {
+        height: 70%;
+        width: 90%;
+    }
+    .new-area {
+        height: 80%;
+        width: 100%;
+        font-size: 25px;
+        background: var(--standart-background);
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .new-area {
+        border-radius: 10px 10px 0px 0px;
+    }
+
+    .sub-button {
+        width: 70px;
+    }
+
+
+
+} */

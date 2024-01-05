@@ -1,0 +1,69 @@
+<script defer src="script/newPostEditor.js"></script>
+<!-- <div id="newPostEditor-popup" class="popup">
+    <div class="editor-popup-content">
+
+        <form enctype="multipart/form-data" onsubmit="return handleSubmit()" class="main-form" action="api/newPost.php" method="post"> 
+            <button type="button" class="editor-close" onclick="closePopup('newPostEditor-popup')">X</button>
+            <div id="postContentEditorDiv" contenteditable="true" class="new-area" >
+        
+            </div> 
+                <textarea style="display:none" name="postEditorTextArea" id="postEditorTextArea" ></textarea> 
+
+                <div class="sub-area">
+                <p class="text-length" id="postLength"></p>
+                <div class="sub-buttons">
+                     <button type="image" class="sub-button">Images</button> 
+        
+                    <label id="imageBtn" class="sub-button" for="images-upload">
+                        <p id="imgButtonText" class="sub-button-text">Image</p>
+                    </label>
+                    <input onchange="imageChangeHandler()" name="postImage" id="images-upload" type="file"/>
+        
+                    <button type="button" onclick="format('bold')" class="sub-button">Gras</button>
+                    <button type="button" onclick="format('italic')" class="sub-button">Italique</button>
+                    <button type="button" onclick="format('underline')" class="sub-button">Souligné</button>
+                </div>
+            </div> 
+            <button class="send" type="submit">Publish</button> 
+            <br><br>
+            <div class="img-preview-div" id='imgPreviewDiv'></div>
+        </form>
+    </div>
+</div> -->
+
+<div id="newPostEditor-popup" class="popup">
+    <div class="popup-content">
+        <div class="popup-content-center">
+            <div class="popup-content-close special" onclick="closePopup('newPostEditor-popup')"></div>
+            <h1 class="popup-content-title special">Nouveau post</h1>
+
+            <form enctype="multipart/form-data" id="postEditorForm" class="main-form" action="api/newPost.php" method="post"> 
+
+                <div id="postContentEditorDiv" contenteditable="true" class="popup-content-textarea" > </div>
+
+                <textarea style="display:none" name="postEditorTextArea" id="postEditorTextArea" ></textarea> 
+
+                <footer class="popup-content-footer">
+                    <div class="popup-content-footer-buttons">
+
+                        <label id="imageBtn" class="popup-content-footer-button" for="images-upload">
+                            <p id="imgButtonText">Image</p>
+                        </label>
+                        <input class="file-upload-input" onchange="imageChangeHandler()" name="postImage" id="images-upload" type="file"/>
+
+                        <button type="button" onclick="format('bold')" class="popup-content-footer-button">Gras</button>
+                        <button type="button" onclick="format('italic')" class="popup-content-footer-button">Italique</button>
+                        <button type="button" onclick="format('underline')" class="popup-content-footer-button">Souligné</button>
+                        <p class="text-length" id="postLength"></p>
+                    </div>
+
+                    <button type="submit" class="popup-content-footer-send">Publier</button>
+                    
+                </footer>
+
+            </form>
+        </div>
+    </div>
+    <br><br>
+    <div class="img-preview-div" id='imgPreviewDiv'></div>
+</div>

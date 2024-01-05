@@ -1,0 +1,305 @@
+.post, .chat {
+    border-radius: var(--border-radius);
+    padding: var(--padding);
+    width: 70%;
+    height: calc(100vh - 90px);
+    row-gap: 10px;
+    display: flex;
+    flex-direction: column;
+    background: var(--secondary-background);
+}
+
+.chat {
+    width: 30%;
+}
+
+.chat.chat-open {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+.post-div, .chat-div, .chat-footer, .popup-content-div {
+    border-radius: var(--border-radius);
+    padding: var(--secondary-padding);
+    padding-left: calc(var(--secondary-padding) + var(--secondary-padding) / 2);
+    padding-right: var(--padding);
+    height: 45px;
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    background: var(--background);
+}
+
+.chat-footer.inside {
+    margin-top: 10px;
+    width: calc(100% - 20px);
+}
+
+.popup-content-div {
+    top: 10px;
+    height: 50px;
+}
+
+.chat-footer {
+    padding-right: calc(var(--secondary-padding) + var(--secondary-padding) / 2);
+    gap: calc(var(--secondary-gap) + var(--secondary-gap) / 2);
+}
+
+.post-div-title, .chat-div-title {
+    color: var(--secondary-color);
+    text-transform: uppercase;
+}
+
+.post-div-select {
+    border-radius: var(--border-radius);
+    padding: var(--secondary-padding);
+    width: calc(100% - 170px);
+    height: 30px;
+    color: var(--color);
+    background: var(--secondary-background);
+}
+
+.post-div-new, .chat-footer-button, .post-div-refresh {
+    border-radius: var(--border-radius);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--secondary-background);
+    cursor: pointer;
+}
+
+.post-div-refresh {
+    background: var(--secondary-background) var(--post-div-refresh) no-repeat center;
+}
+
+
+.post-scroll, .chat-scroll {
+    height: calc(100% - 55px);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+    overflow-y: auto;
+}
+
+.post-scroll.inside {  
+    height: calc(100% - 60px);
+}
+
+.chat-scroll {
+    height: calc(100% - 110px);
+}
+
+.chat-scroll.inside {
+    height: calc(100% - 150px);
+    width: calc(100% - 20px);
+}
+
+.post-message, .chat-message {
+    border-radius: var(--border-radius);
+    padding: var(--padding);
+    gap: var(--gap);
+    display: flex;
+    flex-direction: column;
+    background: var(--background);
+}
+
+.chat-message {
+    padding: calc(var(--padding) - var(--secondary-padding) / 2);
+    width: 90%;
+    gap: calc(var(--secondary-gap) / 2);
+}
+
+.chat-message.stranger {
+    border: var(--border-width) var(--border-style) var(--border-color);
+    margin-left: 10%;
+    background: var(--secondary-background);
+}
+
+.post-message-div, .post-message-footer, .chat-message-div {
+    border-radius: var(--border-radius);
+    padding: var(--secondary-padding);
+    height: 50px;
+    gap: var(--secondary-gap);
+    display: flex;
+    align-items: center;
+    background: var(--secondary-background);
+}
+
+.post-message-footer {
+    justify-content: center;
+}
+
+.chat-message-div {
+    padding: 0;
+    height: 40px;
+    background: none;
+}
+
+.post-message-div-picture, .chat-message-div-picture, .popup-message-div-picture {
+    border-radius: var(--border-radius);
+    height: 40px;
+    width: 40px;
+}
+
+.chat-message-div-picture {
+    border: var(--border-width) var(--border-style) var(--secondary-border-color);
+}
+
+.chat-message-div-picture.stranger {
+    border: var(--border-width) var(--border-style) var(--border-color);
+}
+
+.post-message-div-infos, .chat-message-div-infos, .chat-message-div-infos.stranger {
+    color: var(--color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chat-message-div-infos, .popup-message-div-infos {
+    color: var(--secondary-color);
+}
+
+.post-message-text, .chat-message-text {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--secondary-gap);
+    color: var(--secondary-color);
+}
+
+.chat-message-text {
+    font-size: 14px;
+}
+
+.chat-message-text.stranger {
+    color: var(--color);
+}
+
+.postImg {
+    border-radius: var(--border-radius);
+    max-width: 60%;
+    aspect-ratio: auto;
+  
+}
+
+.post-message-footer-button {
+    border-radius: var(--border-radius);
+    padding: var(--secondary-padding);
+    height: 35px;
+    width: 20%;
+    gap: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--background);
+    cursor: pointer;
+}
+
+.post-message-footer-button-img {
+    width: 30px;
+}
+
+.post-message-footer-button-text {
+    width: 30px;
+    color: var(--secondary-color);
+}
+
+.chat-open-drawer {
+    border: var(--border-width) var(--border-style) var(--color);
+    border-radius: var(--border-radius);
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    box-shadow: 2px 2px;
+    background: var(--secondary-background);
+    transition: 100ms;
+}
+
+.chat-open-drawer:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+}
+
+.chat-footer-input {
+    border-radius: var(--border-radius);
+    padding: var(--padding);
+    height: 30px;
+    width: calc(100%);
+    outline: none;
+    background: var(--secondary-background);
+}
+
+.chat-footer-button-img {
+    width: 30px;
+    height: 25px;
+}
+
+
+@media screen and (max-width: 800px) {
+    .chat-scroll.inside {
+        height: calc(100% - 80px);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .post {
+        width: 100%;
+        height: calc(100vh - 160px);
+    }
+
+    .chat {
+        width: 100%;
+        height: 60px;
+    }
+
+    .chat.chat-open {
+        border-radius: 0;
+        position: fixed;
+        width: 100%;
+        z-index: 2;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    .chat-open-drawer {
+        display: flex;
+    }
+
+    .chat-open-drawer.chat-open {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        width: calc(100vw - 20px);
+        height: 40px;
+    }
+
+    .chat-div, .chat-scroll, .chat-footer {
+        display: none;
+    }
+
+    .chat-scroll.inside {
+        display: flex;
+        height: calc(100% - 80px);
+        background: red;
+    }
+
+    .chat-footer.inside {
+        display: flex;
+    }
+
+    .chat-div.chat-open, .chat-scroll.chat-open, .chat-footer.chat-open {
+        display: flex;
+    }
+    
+    .chat-scroll.chat-open {
+        height: calc(100% - 160px);
+    }
+
+}
