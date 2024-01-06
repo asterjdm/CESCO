@@ -7,9 +7,13 @@
     <link rel="stylesheet" href="src/style/header.css">
     <link rel="stylesheet" href="src/style/main.css">
     <link rel="stylesheet" href="src/style/home.css">
+    <link rel="stylesheet" href="src/style/components.css">
+
 
     <title>CESCO</title>
     <script type="module" src="src/scripts/main.ts"></script>
+    <script src="src/scripts/popups.ts"></script>
+
   </head>
 
   <body>
@@ -21,20 +25,20 @@
 
         <div id="loggedButtons">
 
-          <a id="headerLink" class="header-link" onclick="disconnect()">Déconnexion</a>
-          <a id="headerLink" class="header-link" onclick="openPopup('newPostEditor-popup')">Nouveau</a>
-          <a id="headerLink" class="header-link" onclick="openPopup('settings-popup')">Paramètres</a>
+          <a id="disconnectButton" class="header-link" onclick="disconnect()">Déconnexion</a>
+          <a id="newPostButton" class="header-link" onclick="openPopup('editor-popup')">Nouveau</a>
+          <a id="settingsButton" class="header-link" onclick="openPopup('settings-popup')">Paramètres</a>
 
         </div>
 
         <div id="guestButtons">
 
-          <a id="headerLink" class="header-link" onclick="openPopup('signin-popup')">Connexion</a>
-          <a id="headerLink" class="header-link" onclick="openPopup('signup-popup')">Inscription</a> 
+          <a id="signinButton" class="header-link" onclick="openPopup('signin-popup')">Connexion</a>
+          <a id="signupButton" class="header-link" onclick="openPopup('signup-popup')">Inscription</a> 
 
         </div>
 
-        <a id="headerLink" class="header-link" onclick="toggleTheme()">Changer de thème</a>
+        <a id="toggleThemeButton" class="header-link" onclick="toggleTheme()">Changer de thème</a>
       </div>
 
       <div id="hamburgerMenu" class="hamburger-menu">
@@ -141,7 +145,7 @@
         <div id="popupContentLeft" class="popup-content-left">
             <h1 id="popupContentTitle" class="popup-content-title mini">Paramètres</h1>
             <br>
-            <p style='color:aliceblue;'><b><?php echo $_GET["message"]; ?></b></p>
+            <p style='color:aliceblue;'><b>?php echo $_GET["message"]; ?</b></p>
         </div>
 
         <div id="popupContentRight" class="popup-content-right">
@@ -185,7 +189,7 @@
               <h1 class="popup-content-title">Connexion</h1>
               <a class="popup-content-link" onclick="closePopup('signin-popup'); openPopup('signup-popup')">Pas de compte ?</a>
               <br>
-              <p style='color:aliceblue;'><b><?php echo $_GET["message"]; ?></b></p>
+              <p style='color:aliceblue;'><b>?php echo $_GET["message"]; ?</b></p>
           </div>
   
           <div class="popup-content-right">
@@ -213,7 +217,7 @@
               <h1 id="popupContentTitle" class="popup-content-title">Inscription</h1>
               <a id="popupContentLink" class="popup-content-link" onclick="closePopup('signup-popup'); openPopup('signin-popup')">Pas de compte ?</a>
               <br>
-              <p style='color:aliceblue;'><b><?php echo $_GET["message"]; ?></b></p>
+              <p style='color:aliceblue;'><b>?php echo $_GET["message"]; ?</b></p>
           </div>
           <div id="popupContentRight" class="popup-content-right">
               <form action="api/newUser.php" method="post" onsubmit="return validateSignup()">

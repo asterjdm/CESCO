@@ -1,6 +1,6 @@
 
 
-export async function openPopup(popupId: string)
+async function openPopup(popupId: string)
 {
     document.body.style.overflow = "hidden";
     const popup = document.getElementById(popupId);
@@ -13,7 +13,7 @@ export async function openPopup(popupId: string)
     popup.classList.add("show");
 }
 
-export async function closePopup(popupId: string) {
+async function closePopup(popupId: string) {
     const hamburgerMenu = document.querySelector('.hamburger-menu');
 
     if (hamburgerMenu == null)
@@ -34,7 +34,7 @@ export async function closePopup(popupId: string) {
     {
         throw "Popup ID not found"   
     }
-    
+
     setTimeout(() => {
         popup.classList.remove('show', 'closing');
     }, 250);

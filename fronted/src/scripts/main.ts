@@ -1,5 +1,6 @@
 import {getPosts, formatePost} from "./getPosts.ts";
 import { Post } from "./interfaces.ts";
+import config from "../../config.json";
 
 async function loadPosts(placeId: string, max: number)
 {  
@@ -20,5 +21,7 @@ async function loadPosts(placeId: string, max: number)
 
     postsPlace.innerHTML += postHtml;
 }
+
+
 
 loadPosts("postsPlace", 30)
