@@ -1,25 +1,25 @@
-import {getPost, formatePost} from "./getPosts.ts";
+import {getPosts, formatePost} from "./getPosts.ts";
+import { Post } from "./interfaces.ts";
 
 
-async function loadPost(placeId: string, postId?: number, index?: number)
+async function loadPosts(placeId: string, max: number)
 {  
     const postsPlace = document.getElementById(placeId);
-    
-    let postsData;
 
-    if (typeof postId !== "undefined")
+    if (postsPlace === null)
     {
-        postsData = await getPost(postId);
+        throw "Posts place Id is null"
     }
-    else if (typeof index !== "undefined")
-    {
-        postsData = await getPost(undefined, index);
-    }
-    else {
-        throw new Error("Post index or ID is not specified");
-    }
-     
-    const postHtml: String = formatePost(postsData);
-    
-    
+
+    const postsData = await getPosts(max);
+
+    let postHtml: string = "";
+
+    postsData.forEach((post: Post) => {
+        postHtml += formatePost(post);
+    });
+
+    postsPlace.innerHTML += postHtml;
 }
+
+loadPosts("postsPlace", 30)
