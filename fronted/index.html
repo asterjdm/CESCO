@@ -47,11 +47,229 @@
 
     <main>
       <div class="posts" >
+
+        <div id="sortDiv" class="post-div">
+          <h1 class="post-div-title">post</h1>
+          <select id="sortSelector" class="post-div-select" name="postSelector">
+              <option value="latest">Les plus récents en premier</option>
+              <option value="random">Aléatoire</option>
+              <option value="positive">Les mieux notés en premier (votes positifs - votes négatifs)</option>
+              <option value="positiveVotes">Avec le plus de votes positifs en premier</option>
+              <option value="oldest">Les plus anciens en premier</option>
+          </select>
+          <button class="post-div-new"><img class="post-div-new-img" src="./public/new.svg" alt="new post button"></button>
+          <button id="refreshButton" class="post-div-refresh"></button>
+      </div>
+
         <div class="post-scroll" id="postsPlace">
           <!-- POSTS -->
         </div>
       </div>
     </main>
 
+
+    <!----------------------------- COMMENTS POPUP ----------------------------->
+    <div id="comments-popup" class="popup">
+      <div class="popup-content">
+  
+          <button class="popup-content-close" onclick="closePopup('comments-popup')"></button>
+  
+          <div class="popup-content-left">
+              <h2 class="popup-content-title">Commentaires</h2>
+          </div>
+  
+          <div class="popup-content-right">
+              <div id="commentsContainer" class="chat-scroll inside">
+                  <p class="wait">Please Wait.......</p>
+                  <!-- Comments -->
+              </div>
+  
+              <footer id="chatFooter" class="chat-footer inside">
+  
+                  <input id="commentTextInput" class="chat-footer-input" type="text" placeholder="Sans commentaires...">
+                  <button id="submitButton" class="chat-footer-button"><img class="chat-footer-button-img" src="./public/send.svg" alt="send button"></button>
+              </footer>
+  
+          </div>
+      </div>
+    </div>
+
+
+    <!----------------------------- EDITOR POPUP ----------------------------->
+    <div id="editor-popup" class="popup">
+      <div class="popup-content">
+          <div class="popup-content-center">
+              <div class="popup-content-close special" onclick="closePopup('newPostEditor-popup')"></div>
+              <h1 class="popup-content-title special">Nouveau post</h1>
+  
+              <form enctype="multipart/form-data" id="postEditorForm" class="main-form" action="api/newPost.php" method="post"> 
+  
+                  <div id="postContentEditorDiv" contenteditable="true" class="popup-content-textarea" > </div>
+  
+                  <textarea style="display:none" name="postEditorTextArea" id="postEditorTextArea" ></textarea> 
+  
+                  <footer class="popup-content-footer">
+                      <div class="popup-content-footer-buttons">
+  
+                          <label id="imageBtn" class="popup-content-footer-button" for="images-upload">
+                              <p id="imgButtonText">Image</p>
+                          </label>
+                          <input class="file-upload-input" onchange="imageChangeHandler()" name="postImage" id="images-upload" type="file"/>
+  
+                          <button type="button" onclick="format('bold')" class="popup-content-footer-button">Gras</button>
+                          <button type="button" onclick="format('italic')" class="popup-content-footer-button">Italique</button>
+                          <button type="button" onclick="format('underline')" class="popup-content-footer-button">Souligné</button>
+                          <p class="text-length" id="postLength"></p>
+                      </div>
+  
+                      <button type="submit" class="popup-content-footer-send">Publier</button>
+                      
+                  </footer>
+  
+              </form>
+          </div>
+      </div>
+      <br><br>
+      <div class="img-preview-div" id='imgPreviewDiv'></div>
+    </div>
+
+   <!----------------------------- SETTINGS POPUP ----------------------------->
+   <div id="settings-popup" class="popup">
+    <div class="popup-content">
+        <button class="popup-content-close" onclick="closePopup('settings-popup')"></button>
+
+        <div id="popupContentLeft" class="popup-content-left">
+            <h1 id="popupContentTitle" class="popup-content-title mini">Paramètres</h1>
+            <br>
+            <p style='color:aliceblue;'><b><?php echo $_GET["message"]; ?></b></p>
+        </div>
+
+        <div id="popupContentRight" class="popup-content-right">
+
+            <form  enctype="multipart/form-data" action="api/saveSettings.php" method="post">
+
+                <div class="popup-content-inputbox">
+                    <input name="username" maxlength="14" minlength=3 class="popup-content-inputbox-input" type="text">
+                    <span class="popup-content-inputbox-span">Changer nom d'utilisateur</span>
+                </div>
+                <div class="popup-content-inputbox">
+                    <input minlength="8" maxlength="255" name="newPassword" placeholder="Nouveau mot de passe" class="popup-content-inputbox-input" type="password" required="required">
+                    <span class="popup-content-inputbox-span">Changer mot de passe</span>
+                </div>
+                <div class="popup-content-inputbox">
+                    <input name="old-password" class="popup-content-inputbox-input" type="password">
+                    <span class="popup-content-inputbox-span">Mot de passe actuel</span>
+                </div>
+
+                <label id="imagePreview" class="file-upload-button">
+                    <input id="profileImageInput" class="file-upload-input" name="profile_image" type="file">
+                    <span class="popup-content-inputbox-span">Changer d'image de profile</span>
+                </label>
+
+                <button type="submit" class="popup-content-button">Enregistrer</button>     
+
+            </form>
+        </div>
+
+      </div>
+    </div>
+
+    
+
+    <!----------------------------- SIGN-IN POPUP ----------------------------->
+    <div id="signin-popup" class="popup">
+      <div class="popup-content">
+          <button class="popup-content-close" onclick="closePopup('signin-popup')"></button>
+  
+          <div class="popup-content-left">
+              <h1 class="popup-content-title">Connexion</h1>
+              <a class="popup-content-link" onclick="closePopup('signin-popup'); openPopup('signup-popup')">Pas de compte ?</a>
+              <br>
+              <p style='color:aliceblue;'><b><?php echo $_GET["message"]; ?></b></p>
+          </div>
+  
+          <div class="popup-content-right">
+              <form action="api/connection.php" method="post">
+                  <div class="popup-content-inputbox">
+                      <input name="username" class="popup-content-inputbox-input" type="text" required="required">
+                      <span class="popup-content-inputbox-span">Nom d'utilisateur</span>
+                  </div>
+                  <div class="popup-content-inputbox">
+                      <input name="password" class="popup-content-inputbox-input" type="password" required="required">
+                      <span class="popup-content-inputbox-span">Mot de passe</span>
+                  </div>
+                  <button type="submit" class="popup-content-button">Connexion</button>        
+              </form>            
+          </div>
+      </div>
+    </div>
+  
+
+    <!----------------------------- SIGN-UP POPUP ----------------------------->
+    <div id="signup-popup" class="popup">
+      <div class="popup-content">
+          <button class="popup-content-close" onclick="closePopup('signup-popup')"></button>
+          <div id="popupContentLeft" class="popup-content-left">
+              <h1 id="popupContentTitle" class="popup-content-title">Inscription</h1>
+              <a id="popupContentLink" class="popup-content-link" onclick="closePopup('signup-popup'); openPopup('signin-popup')">Pas de compte ?</a>
+              <br>
+              <p style='color:aliceblue;'><b><?php echo $_GET["message"]; ?></b></p>
+          </div>
+          <div id="popupContentRight" class="popup-content-right">
+              <form action="api/newUser.php" method="post" onsubmit="return validateSignup()">
+                  <div class="popup-content-inputbox">
+                      <input name="username" class="popup-content-inputbox-input" type="text" required="required">
+                      <span class="popup-content-inputbox-span">Nom d'utilisateur</span>
+                  </div>
+                  <div class="popup-content-inputbox">
+                      <input id="passwordInput" name="password" class="popup-content-inputbox-input" type="password" required="required">
+                      <span class="popup-content-inputbox-span">Mot de passe</span>
+                  </div>
+                  <div class="popup-content-inputbox">
+                      <input id="passwordValidationInput" class="popup-content-inputbox-input" type="password" required="required">
+                      <span class="popup-content-inputbox-span">Confirmer le mot de passe</span>
+                  </div>
+                  <button type="submit" class="popup-content-button">Connexion</button>        
+              </form>
+          </div>
+      </div>
+    </div>
+  
+
+    <!----------------------------- USERS PROFILE POPUP ----------------------------->
+    <div id="usersProfile-popup" class="popup">
+      <div class="popup-content">
+  
+          <button class="popup-content-close very special" onclick="closePopup('userPage-popup')"></button>
+  
+          <div class="popup-content-center special">
+  
+              <div class="popup-content-div">
+                  <img id="profilePicture" class="popup-message-div-picture" src="./public/profileExample.png" alt="profile picture">
+  
+                  <div class="popup-message-div-infos">
+                      <p id="username">...</p>
+                      <p>...</p>
+                  </div>
+  
+                  <button id="followButton" class="follow"></button>
+  
+              </div>
+  
+              <main class="popup-content-main">
+  
+                  <div id="userPagePosts" class="post-scroll inside">
+                      <!-- POSTS -->
+                  </div>
+  
+              </main>
+          </div>
+      </div>
+  
+  </div>
+    
+
+  
+    
   </body>
 </html>
