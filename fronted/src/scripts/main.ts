@@ -2,6 +2,8 @@ import {getPosts, formatePost} from "./getPosts.ts";
 import { Post } from "./interfaces.ts";
 import config from "../../config.json";
 
+
+
 async function loadPosts(placeId: string, max: number)
 {  
     const postsPlace = document.getElementById(placeId);
