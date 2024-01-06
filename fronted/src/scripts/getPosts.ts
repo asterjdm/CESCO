@@ -26,11 +26,11 @@ export function formatePost(postData: Post): string
                     ${postData.content}
                 </div>
                 <footer class="post-message-footer">
-                    <button class="post-message-footer-button except" onclick="openCommentsPopup(${postData.ID})" ><img class="post-message-footer-button-img" src="./images/comments.svg" alt="comment button"></button>
-                    <button class="post-message-footer-button" onclick="voteAndUpdatePost(${postData.ID}, 2)" ><img class="post-message-footer-button-img" src="./images/expandWhite.svg" alt="comment button"><p class="post-message-footer-button-text">${postData.votes_positives_count}</p></button>
-                    <button class="post-message-footer-button" onclick="voteAndUpdatePost(${postData.ID}, 1)" ><img class="post-message-footer-button-img" src="./images/middlevote.svg" alt="comment button"><p class="post-message-footer-button-text">${postData.votes_neutrals_count}</p></button>
-                    <button class="post-message-footer-button" onclick="voteAndUpdatePost(${postData.ID}, 0)" ><img class="post-message-footer-button-img" src="./images/downvote.svg" alt="comment button"><p class="post-message-footer-button-text">${postData.votes_negatives_count}</p></button>
-                    <button class="post-message-footer-button except" onclick="report(${postData.ID})"><img class="post-message-footer-button-img" src="./images/report.svg" alt="comment button"></button>
+                    <button class="post-message-footer-button except" onclick="openCommentsPopup(${postData.ID})" ><img class="post-message-footer-button-img" src="./public/comments.svg" alt="comment button"></button>
+                    <button class="post-message-footer-button" onclick="voteAndUpdatePost(${postData.ID}, 2)" ><img class="post-message-footer-button-img" src="./public/expandWhite.svg" alt="comment button"><p class="post-message-footer-button-text">${postData.votes_positives_count}</p></button>
+                    <button class="post-message-footer-button" onclick="voteAndUpdatePost(${postData.ID}, 1)" ><img class="post-message-footer-button-img" src="./public/middlevote.svg" alt="comment button"><p class="post-message-footer-button-text">${postData.votes_neutrals_count}</p></button>
+                    <button class="post-message-footer-button" onclick="voteAndUpdatePost(${postData.ID}, 0)" ><img class="post-message-footer-button-img" src="./public/downvote.svg" alt="comment button"><p class="post-message-footer-button-text">${postData.votes_negatives_count}</p></button>
+                    <button class="post-message-footer-button except" onclick="report(${postData.ID})"><img class="post-message-footer-button-img" src="./public/report.svg" alt="comment button"></button>
                 </footer>
             </div>
         </div>
