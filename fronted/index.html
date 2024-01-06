@@ -1,16 +1,56 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CESCO</title>
-  </head>
-  <body>
-    <div id="postsPlace">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/style/header.css">
+    <link rel="stylesheet" href="src/style/main.css">
+    <link rel="stylesheet" href="src/style/home.css">
 
+    <title>CESCO</title>
+    <script type="module" src="src/scripts/main.ts"></script>
+  </head>
+
+  <body>
+    <header id="mainHeader" class="main-header">
+      <h1 id="mainTitle" class="main-title">cesco</h1>
+      <div id="headerSeparator" class="header-separator"></div>
+
+      <div id="headerLinks" class="header-links">
+
+        <div id="loggedButtons">
+
+          <a id="headerLink" class="header-link" onclick="disconnect()">Déconnexion</a>
+          <a id="headerLink" class="header-link" onclick="openPopup('newPostEditor-popup')">Nouveau</a>
+          <a id="headerLink" class="header-link" onclick="openPopup('settings-popup')">Paramètres</a>
+
+        </div>
+
+        <div id="guestButtons">
+
+          <a id="headerLink" class="header-link" onclick="openPopup('signin-popup')">Connexion</a>
+          <a id="headerLink" class="header-link" onclick="openPopup('signup-popup')">Inscription</a> 
+
+        </div>
+
+        <a id="headerLink" class="header-link" onclick="toggleTheme()">Changer de thème</a>
+      </div>
+
+      <div id="hamburgerMenu" class="hamburger-menu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+
+    </header>
+
+    <div class="posts" >
+      <div class="post-scroll" id="postsPlace">
+
+      </div>
     </div>
 
-    <script type="module" src="/src/scripts/main.ts"></script>
+
   </body>
 </html>
