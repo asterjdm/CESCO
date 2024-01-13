@@ -1,5 +1,6 @@
 import config from "../../config.json";
 import { Post } from "./interfaces.ts"
+import { vote } from "./main.ts";
 
 export async function getPosts(max: number): Promise<[Post]>
 {
@@ -63,6 +64,7 @@ export function formatePost(postData: Post): HTMLDivElement {
     let positiveVotesButton = document.createElement('button');
     positiveVotesButton.id = `vote_2_button_${postData.ID}`;
     positiveVotesButton.className = 'post-message-footer-button';
+    positiveVotesButton.onclick = () => vote(Number(postData.ID), 2)
 
     let positiveVotesButtonImg = document.createElement('img');
     positiveVotesButtonImg.className = 'post-message-footer-button-img';
@@ -80,6 +82,7 @@ export function formatePost(postData: Post): HTMLDivElement {
     let neutralVotesButton = document.createElement('button');
     neutralVotesButton.id = `vote_1_button_${postData.ID}`;
     neutralVotesButton.className = 'post-message-footer-button';
+    neutralVotesButton.onclick = () => vote(Number(postData.ID), 1)
 
     let neutralVotesButtonImg = document.createElement('img');
     neutralVotesButtonImg.className = 'post-message-footer-button-img';
@@ -97,7 +100,8 @@ export function formatePost(postData: Post): HTMLDivElement {
     let negativeVotesButton = document.createElement('button');
     negativeVotesButton.id = `vote_0_button_${postData.ID}`;
     negativeVotesButton.className = 'post-message-footer-button';
-
+    negativeVotesButton.onclick = () => vote(Number(postData.ID), 0)
+    
     let negativeVotesButtonImg = document.createElement('img');
     negativeVotesButtonImg.className = 'post-message-footer-button-img';
     negativeVotesButtonImg.src = './public/downvote.svg';

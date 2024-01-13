@@ -1,29 +1,33 @@
-import {getPosts, formatePost} from "./getPosts.ts";
+import { getPosts, formatePost } from "./getPosts.ts";
 import { Post } from "./interfaces.ts";
 import config from "../../config.json";
+import { sendVote } from "./sendVote.ts";
 
-
-
-async function loadPosts(placeId: string, max: number)
-{  
+async function loadPosts(placeId: string, max: number) {  
     const postsPlace = document.getElementById(placeId);
 
-    if (postsPlace === null)
-    {
-        throw "Posts place Id is null"
+    if (!postsPlace) {
+        throw new Error("Posts place Id is null");
     }
 
     const postsData = await getPosts(max);
 
-    let postHtml: string = "";
+    let postDiv: HTMLDivElement;
 
     postsData.forEach((post: Post) => {
-        postHtml += formatePost(post);
+        postDiv = formatePost(post);
+        postsPlace.appendChild(postDiv);
     });
-
-    postsPlace.innerHTML += postHtml;
 }
 
+export async function vote(postId: number, voteType: number) {
+    sendVote(postId, voteType);
+    
+    const voteCounter = document.getElementById(`post_${postId}`)?.querySelector(`#votes_count_${voteType}`);
+    
+    if (voteCounter) {
+        voteCounter.textContent = (Number(voteCounter.textContent) + 1).toString();
+    }
+}
 
-
-loadPosts("postsPlace", 30)
+loadPosts("postsPlace", 30);
