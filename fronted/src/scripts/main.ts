@@ -1,6 +1,5 @@
 import { getPosts, formatePost } from "./getPosts.ts";
 import { Post } from "./interfaces.ts";
-import config from "../../config.json";
 import { sendVote } from "./sendVote.ts";
 
 async function loadPosts(placeId: string, max: number) {  

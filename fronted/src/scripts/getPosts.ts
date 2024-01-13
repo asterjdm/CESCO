@@ -1,10 +1,9 @@
-import config from "../../config.json";
 import { Post } from "./interfaces.ts"
 import { vote } from "./main.ts";
 
 export async function getPosts(max: number): Promise<[Post]>
 {
-    const response = await fetch(`${config.api_base_url}posts.php?max=${max}`);
+    const response = await fetch(`https://rmbi.ch/api/posts.php?max=${max}`);
     const posts = await response.json();
 
     return posts;
