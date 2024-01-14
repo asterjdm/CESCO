@@ -1,5 +1,5 @@
 
-export async function sendVote(postId: number, voteType: number)
+export async function sendVote(postId: number, voteType: number): Promise<any>
 {
     const formData = new FormData();
 
@@ -8,8 +8,12 @@ export async function sendVote(postId: number, voteType: number)
 
     const response = await fetch(`https://rmbi.ch/cesco/api/newVote.php`, {
         method: "POST",
-        body: formData
+        body: formData,
+        credentials: "include"
     });
 
     const responseData = await response.json();
+    
+    return responseData;
 }
+

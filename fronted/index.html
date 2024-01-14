@@ -13,6 +13,8 @@
     <title>CESCO</title>
     <script defer type="module" src="src/scripts/main.ts"></script>
     <script src="src/scripts/popups.ts"></script>
+    <script src="src/scripts/forms.ts"></script>
+
 
 
   </head>
@@ -24,15 +26,15 @@
 
       <div id="headerLinks" class="header-links">
 
-        <div id="loggedButtons">
+        <div id="loggedButtons" style="display: none;">
 
-          <a id="disconnectButton" class="header-link" onclick="disconnect()">Déconnexion</a>
+          <a id="disconnectButton" class="header-link" onclick="window.open('https://rmbi.ch/cesco/api/disconnect.php'); location.reload();">Déconnexion</a>
           <a id="newPostButton" class="header-link" onclick="openPopup('editor-popup')">Nouveau</a>
           <a id="settingsButton" class="header-link" onclick="openPopup('settings-popup')">Paramètres</a>
 
         </div>
 
-        <div id="guestButtons">
+        <div id="guestButtons" style="display: none;">
 
           <a id="signinButton" class="header-link" onclick="openPopup('signin-popup')">Connexion</a>
           <a id="signupButton" class="header-link" onclick="openPopup('signup-popup')">Inscription</a> 
@@ -107,7 +109,7 @@
               <div class="popup-content-close special" onclick="closePopup('newPostEditor-popup')"></div>
               <h1 class="popup-content-title special">Nouveau post</h1>
   
-              <form enctype="multipart/form-data" id="postEditorForm" class="main-form" action="api/newPost.php" method="post"> 
+              <form enctype="multipart/form-data" id="postEditorForm" class="main-form" action="https://rmbi.ch/cesco/api/newPost.php" method="post"> 
   
                   <div id="postContentEditorDiv" contenteditable="true" class="popup-content-textarea" > </div>
   
@@ -151,7 +153,7 @@
 
         <div id="popupContentRight" class="popup-content-right">
 
-            <form  enctype="multipart/form-data" action="api/saveSettings.php" method="post">
+            <form  enctype="multipart/form-data" action="https://rmbi.ch/cesco/api/saveSettings.php" method="post">
 
                 <div class="popup-content-inputbox">
                     <input name="username" maxlength="14" minlength=3 class="popup-content-inputbox-input" type="text">
@@ -190,21 +192,21 @@
               <h1 class="popup-content-title">Connexion</h1>
               <a class="popup-content-link" onclick="closePopup('signin-popup'); openPopup('signup-popup')">Pas de compte ?</a>
               <br>
-              <p style='color:aliceblue;'><b>?php echo $_GET["message"]; ?</b></p>
+              <p id="message" style='color:rgb(255, 0, 0);'>  </p>
           </div>
   
           <div class="popup-content-right">
-              <form action="api/connection.php" method="post">
+              <div id="signinForm">
                   <div class="popup-content-inputbox">
-                      <input name="username" class="popup-content-inputbox-input" type="text" required="required">
+                      <input id="usernameInput" name="username" class="popup-content-inputbox-input" type="text" required="required">
                       <span class="popup-content-inputbox-span">Nom d'utilisateur</span>
                   </div>
                   <div class="popup-content-inputbox">
-                      <input name="password" class="popup-content-inputbox-input" type="password" required="required">
+                      <input id="passwordInput" name="password" class="popup-content-inputbox-input" type="password" required="required">
                       <span class="popup-content-inputbox-span">Mot de passe</span>
                   </div>
-                  <button type="submit" class="popup-content-button">Connexion</button>        
-              </form>            
+                  <button onclick="sendConnection()" class="popup-content-button">Connexion</button>        
+              </div>            
           </div>
       </div>
     </div>
@@ -221,7 +223,7 @@
               <p style='color:aliceblue;'><b>?php echo $_GET["message"]; ?</b></p>
           </div>
           <div id="popupContentRight" class="popup-content-right">
-              <form action="api/newUser.php" method="post" onsubmit="return validateSignup()">
+              <form action="https://rmbi.ch/cesco/api/newUser.php" method="post" onsubmit="return validateSignup()">
                   <div class="popup-content-inputbox">
                       <input name="username" class="popup-content-inputbox-input" type="text" required="required">
                       <span class="popup-content-inputbox-span">Nom d'utilisateur</span>
