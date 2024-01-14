@@ -57,6 +57,12 @@ form {
     display: contents;
 }
 
+
+button:disabled, button[disabled]{
+    cursor: default;
+    background-color: #555;
+}
+
 ::-webkit-scrollbar { 
     width: 0.5vw;
   
