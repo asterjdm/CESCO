@@ -116,14 +116,14 @@
     
                         <div class="popup-content-footer-buttons">
     
-                            <label id="imageBtn" class="popup-content-footer-button" for="images-upload">
+                            <label id="imageBtnLabel" class="popup-content-footer-button" for="images-upload-input">
                                 <p id="imgButtonText">Image</p>
                             </label>
-                            <input class="file-upload-input" onchange="imageChangeHandler()" name="postImage" id="images-upload" type="file"/>
+                            <input class="file-upload-input" onchange="postsImageChangeHandler()" name="postImage" id="images-upload-input" type="file"/>
     
-                            <button type="button" onclick="format('bold')" class="popup-content-footer-button">Gras</button>
-                            <button type="button" onclick="format('italic')" class="popup-content-footer-button">Italique</button>
-                            <button type="button" onclick="format('underline')" class="popup-content-footer-button">Souligné</button>
+                            <button type="button" onclick="formateText('bold')" class="popup-content-footer-button">Gras</button>
+                            <button type="button" onclick="formateText('italic')" class="popup-content-footer-button">Italique</button>
+                            <button type="button" onclick="formateText('underline')" class="popup-content-footer-button">Souligné</button>
 
                         </div>
     
@@ -134,13 +134,15 @@
                         <p class="text-length" id="postLength"></p>
                     <!-- _ -->
 
+
+
                     <!-- Message : -->
                     <p id="message"></p>
                 </div>
             </div>
         </div>
-        <br><br>
         <div class="img-preview-div" id='imgPreviewDiv'></div>
+
     </div>
 
    <!----------------------------- SETTINGS POPUP ----------------------------->

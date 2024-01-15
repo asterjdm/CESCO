@@ -1,128 +1,152 @@
-const postContentEditor = document.getElementById("postContentEditorDiv")
- 
+const editorPopup = document.getElementById("editor-popup") as HTMLDivElement;
+const imgPreviewDiv = editorPopup.querySelector("#imgPreviewDiv") as HTMLDivElement;
+const imageInput = editorPopup.querySelector("#images-upload-input") as HTMLDivElement;
+const imgButtonText = editorPopup.querySelector("#imgButtonText") as HTMLElement;
 
-async function sendConnection() 
-{
-    const signinForm = document.getElementById("signinForm");
+const postLengthEl = document.getElementById("postLength") as HTMLElement;
+const postContentEditorEl = document.getElementById("postContentEditorDiv") as HTMLDivElement;
+const addImgInput = document.getElementById("images-upload-input") as HTMLInputElement;
+const addImgLabel = document.getElementById("imageBtnLabel") as HTMLInputElement;
 
+
+
+if (!editorPopup || !editorPopup || !imageInput || !imageInput || !postLengthEl || !postContentEditorEl || !addImgLabel) {
+    throw new Error("Elements not found.");
+}
+
+
+async function sendConnection() {
+    const signinForm = document.getElementById("signinForm") as HTMLFormElement;
 
     if (!signinForm) return;
 
-    const usernameInput: HTMLInputElement | null = signinForm.querySelector("#usernameInput");
-    const passwordInput: HTMLInputElement | null = signinForm.querySelector("#passwordInput");
-    
-    if (!usernameInput || !passwordInput) {
-        return;
-    }
-    
+    const usernameInput = signinForm.querySelector("#usernameInput") as HTMLInputElement;
+    const passwordInput = signinForm.querySelector("#passwordInput") as HTMLInputElement;
+
+    if (!usernameInput || !passwordInput) return;
+
     const username = usernameInput.value;
     const password = passwordInput.value;
-    
-    
+
     const formData = new FormData();
     formData.append('username', username);
     formData.append('password', password);
-        
 
-    const response = await fetch(`https://rmbi.ch/cesco/api/connection.php`, {
-        method: "POST",
-        body: formData,
-        credentials: "include"
-    });
+    try {
+        const response = await fetch(`https://rmbi.ch/cesco/api/connection.php`, {
+            method: "POST",
+            body: formData,
+            credentials: "include"
+        });
 
-    const responseData = await response.json();
+        const responseData = await response.json();
 
-    if (responseData.success)
-    {
-        location.reload();
-    } else {
-        const signinPopup: HTMLElement | null = document.getElementById("signin-popup");
+        if (responseData.success) {
+            location.reload();
+        } else {
+            const signinPopup = document.getElementById("signin-popup") as HTMLElement;
+            const messagePlace = signinPopup?.querySelector('#message') as HTMLElement;
 
-        if (!signinPopup) return;
-
-        const messagePlace: HTMLElement | null = signinPopup.querySelector('#message');
-        
-        console.log("fake pasword")
-        if (!messagePlace) return;
-
-        messagePlace.innerHTML = "Mot de Passe ou Nom d'Utilisateur <strike>incorèkte</strike> <b>incorrect</b> !";
-        
+            if (messagePlace) {
+                console.log("fake password");
+                messagePlace.innerHTML = "Mot de Passe ou Nom d'Utilisateur <strike>inkorècktte</strike> <b>incorrect</b> !";
+            }
+        }
+    } catch (error) {
+        console.error("Error during login:", error);
     }
 }
-
-
 
 async function sendNewPost() 
 {
-
-    const editorForm = document.getElementById("editorForm");
-
-    if (!editorForm) return;
-
-    const postImageEl: HTMLInputElement | null = editorForm.querySelector("#images-upload");
-    const postContentEditorEl = document.getElementById("postContentEditorDiv")
-    
-    if (!postImageEl || !postContentEditorEl) {
-        return;
-    }
-
-
     const postContentEditor = postContentEditorEl.innerHTML;
-    const postImageFiles: FileList|null = postImageEl.files;
+    const postImageFiles = addImgInput.files;
 
     const formData = new FormData();
-
-
     formData.append('postContent', postContentEditor);
 
-    if (postImageFiles != null && postImageFiles.length > 0) {
+    if (postImageFiles && postImageFiles.length > 0) {
         formData.append('postImage', postImageFiles[0]);
     }
-    
-    const response = await fetch(`https://rmbi.ch/cesco/api/newPost.php`, {
-        method: "POST",
-        body: formData,
-        credentials: "include"
-    });
 
-    const responseData = await response.json();
+    try {
+        const response = await fetch(`https://rmbi.ch/cesco/api/newPost.php`, {
+            method: "POST",
+            body: formData,
+            credentials: "include"
+        });
 
-    if (responseData.success)
-    {
-        location.reload();
-    } else {
-        const messagePlace = editorForm.querySelector("#message");
-        if (messagePlace == null) { return; }
-        messagePlace.innerHTML = "Un problème est survenu...";
+        const responseData = await response.json();
+
+        if (responseData.success) {
+            location.reload();
+        } else {
+            const messagePlace = editorPopup?.querySelector("#message") as HTMLElement;
+            if (messagePlace) {
+                messagePlace.innerHTML = "Un problème est survenu...";
+            }
+        }
+    } catch (error) {
+        console.error("Error during post creation:", error);
     }
 }
 
+function onPostEditorChange() {
+    const postLength = (postContentEditorEl.innerHTML || "").length;
 
-async function onPostEditorChange(e: Event)
-{
-    console.log("post change")
-    const postLengthEl = document.getElementById("postLength");
+    if (!postLengthEl) return;
 
-    const { target } = e;
-    if (!target) return;
+    postLengthEl.innerText = `${postLength}/500`;
 
-    const postLength = (target as HTMLDivElement).innerHTML.length;
+    const submitPostButton = document.getElementById("newPostSubmitButton") as HTMLButtonElement;
+    if (!submitPostButton) return;
 
-    if(!postLengthEl) return;
-
-    postLengthEl.innerText = `${postLength.toString()}/500`;
-
-    const submitPostButton = document.getElementById("newPostSubmitButton") as HTMLButtonElement
-    if(!submitPostButton) return;
-    if (postLength > 500)
-    {
+    if (postLength > 500) {
         postLengthEl.style.color = "red";
-
-        submitPostButton.disabled = true
+        submitPostButton.disabled = true;
     } else {
         postLengthEl.style.color = "black";
         submitPostButton.disabled = false;
     }
 }
 
-postContentEditor?.addEventListener("keyup", onPostEditorChange);
+function formateText(command: string, value: string) {
+    document.execCommand(command, false, value);
+}
+
+
+function postsImageChangeHandler() {
+    console.info("addImagePreview")
+
+    const postImageFiles = addImgInput.files;
+
+    if (postImageFiles && postImageFiles.length > 0) {
+        const fileReader = new FileReader();
+        const selectedFile = postImageFiles[0];
+
+        fileReader.readAsDataURL(selectedFile);
+        fileReader.addEventListener("load", function () {
+            imgPreviewDiv.innerHTML = `<img class='img-preview' id='imgPreview' width=100 src='${this.result}' />`;
+        });
+
+        imgButtonText.innerText = "Supprimer l'image";
+        addImgInput.disabled = true;
+        addImgLabel.onclick = removeImagePreview;
+
+    }
+}
+
+function removeImagePreview() {
+    console.info("remove image preview")
+    imgPreviewDiv.innerHTML = "";
+    imgButtonText.innerText = "Image";
+
+    addImgLabel.removeEventListener("click", removeImagePreview);
+    setTimeout(function() {
+        addImgInput.disabled = false;
+    }, 50)
+}
+
+
+
+postContentEditorEl.addEventListener("input", onPostEditorChange);
