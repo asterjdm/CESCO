@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+include('api_config.php');
 
 include_once("utils/database.php");
 include_once("utils/hash.php");

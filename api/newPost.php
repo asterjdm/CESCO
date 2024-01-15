@@ -1,19 +1,21 @@
 <?php
-session_start();
+
+include('api_config.php');
 include_once("utils/database.php");
 include_once("../config.php");
 
-if (!isset($_POST['postEditorTextArea'])) {
+if (!isset($_POST['postContent'])) {
+    echo json_encode(array("success" => false));
     exit();
 }
 
 
 if (!isset($_SESSION["userId"])) {
-    header('Location: ../index.php?popup=signin');
+    echo json_encode(array("success" => false));
     exit();
 }
 
-$PostContent = $_POST['postEditorTextArea'];
+$PostContent = $_POST['postContent'];
 $fullDomain = isset($_SERVER['HTTPS']) ? "https" : "http" . "://" . $_SERVER['HTTP_HOST'];
 
 if (isset($_FILES["postImage"])) {
@@ -32,24 +34,26 @@ if (isset($_FILES["postImage"])) {
     $check = getimagesize($postImage["tmp_name"]);
 
     if ($check !== false) {
-        echo "File is an image - " . $check["mime"] . ".<br>";
+        // echo "File is an image - " . $check["mime"] . ".<br>";
         $uploadOk = 1;
     } else {
-        echo "File is not an image.<br>";
+        // echo "File is not an image.<br>";
         $uploadOk = 0;
     }
 
     if ($postImage["size"] > MAX_IMAGE_SIZE) {
-        echo "Sorry, the file is too large.<br>";
-        echo "File size: " . $postImage["size"] . "<br>";
-        echo "Maximum size: " . MAX_IMAGE_SIZE . "<br>";
+        // echo "Sorry, the file is too large.<br>";
+        // echo "File size: " . $postImage["size"] . "<br>";
+        // echo "Maximum size: " . MAX_IMAGE_SIZE . "<br>";
         $uploadOk = 0;
     }
 
 
 
     if ($uploadOk == 0) {
-        echo "<br>Sorry, the file was not uploaded.<br>";
+        // echo "<br>Sorry, the file was not uploaded.<br>";
+        echo json_encode(array("success" => false));
+        exit();
     } else {
         // Resize the uploaded image
         $resizedImage = imagecreatefromstring(file_get_contents($postImage["tmp_name"]));
@@ -64,7 +68,7 @@ if (isset($_FILES["postImage"])) {
         imagedestroy($resizedImage);
 
         if($resizedImage == false){
-            echo "error with resizing image.";
+            echo json_encode(array("success" => false));
             exit();
         }
 
@@ -85,8 +89,7 @@ $sanitizedPostContent = preg_replace($url, "<a target='_blank' href='$0'>$0</a>"
 $cleanPostContent = $db->escapeStrings($sanitizedPostContent);
 
 if (strlen(strip_tags($PostContent)) < 2 || strlen(strip_tags($PostContent)) > MAX_POSTS_LENGTH) {
-    echo "Error with post length <br>";
-    echo strlen($PostContent);
+    echo json_encode(array("success" => false));
     exit();
 }
 
@@ -96,5 +99,6 @@ $insertNewPostSqlPrompt = "INSERT INTO cesco_posts (content, USER_FK) VALUES ('$
 
 $db->query($insertNewPostSqlPrompt);
 
-header('Location: ../index.php?p=home');
+echo json_encode(array("success" => true));
+// header('Location: ../index.php?p=home');
 ?>

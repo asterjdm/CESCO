@@ -1,5 +1,5 @@
 <?php
-session_start();
+include('api_config.php');
 
 include_once("utils/database.php");
 $db = new Database();

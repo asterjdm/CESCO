@@ -1,5 +1,5 @@
 <?php
-session_start();
+include('api_config.php');
 header('Content-Type: application/json');
 
 include_once("../config.php");

@@ -1,9 +1,10 @@
 <?php
 // error_reporting(E_ALL);
 // ini_set('display_errors', 1);
+
 header('Content-Type: application/json; charset=utf-8');
 include_once("utils/database.php");
-session_start();
+include('api_config.php');
 
 
 if (!isset($_POST["id"])){

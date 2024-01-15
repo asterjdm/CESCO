@@ -1,7 +1,6 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-session_start();
+
+include('api_config.php');
 header('Content-Type: application/json; charset=utf-8');
 require_once("utils/database.php");
 

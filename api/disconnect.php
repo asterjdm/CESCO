@@ -1,5 +1,6 @@
 <?php
-session_start();
+
+include('api_config.php');
 session_destroy();
-header("location: ../index.php");
+echo "<script>window.close();</script>";
 ?>

@@ -1,6 +1,6 @@
 <?php
 include_once("../config.php");
-session_start();
+include('api_config.php');
 include_once("utils/database.php");
 
 // If post/user isn't present in request

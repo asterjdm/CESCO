@@ -1,5 +1,6 @@
 <?php
-session_start();
+
+include('api_config.php');
 include_once("utils/database.php");
 header('Content-Type: application/json; charset=utf-8');
 
@@ -8,7 +9,7 @@ if (!(isset($_POST["post_id"]) && isset($_POST["type"]) && (int) $_POST["type"] 
     exit();
 }
 if (!isset($_SESSION["userId"])) {
-    echo json_encode(array("info" => "Not connected"));
+    echo json_encode(array("error" => "User not logged in"));
     exit();
 }
 
@@ -25,5 +26,9 @@ $voteActionSqlQuery = (count($verifyIfAlreadyLikedResult) == 0) ?
     "DELETE FROM cesco_votes WHERE USER_FK = '$userId' AND POST_FK='$postId' AND vote_type = '$voteType'";
 
 $db->query($voteActionSqlQuery);
-echo json_encode(array())
+
+$getAllVotes = "SELECT * FROM cesco_votes WHERE USER_FK = '$userId' AND POST_FK='$postId' AND vote_type = '$voteType'";
+$allVotes = $db->select($verifyIfAlreadyLikedSqlQuery);
+
+echo json_encode(array("votes_count" => sizeof($allVotes)));
 ?>
