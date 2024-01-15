@@ -116,7 +116,7 @@ export function formatePost(postData: Post): HTMLDivElement {
 
     let reportButton = document.createElement('button');
     reportButton.className = 'post-message-footer-button except';
-    reportButton.onclick// = () => report(postData.ID);
+    reportButton.onclick = () => report(Number(postData.ID));
 
     let reportButtonImg = document.createElement('img');
     reportButtonImg.className = 'post-message-footer-button-img';
