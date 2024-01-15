@@ -5,18 +5,20 @@ include_once("../config.php");
 header('Content-Type: application/json; charset=utf-8');
 
 if (!isset($_POST['commentContent']) || !isset($_POST['postId'])) {
-    echo json_encode(array("error" => "Parameters error"));
+    echo json_encode(array("success" => false));
     exit();
 }
 
 if(!isset($_SESSION["userId"])){
-    echo json_encode(array("error" => "Not connected"));
+    echo json_encode(array("success" => false));
     exit();
 }
 
 if (strlen($_POST['commentContent']) < 2 || strlen($_POST['commentContent']) > MAX_COMMENT_LENGTH) {
-    echo "error with comment length <br>";
-    echo strlen($_POST['commentContent']);
+    // echo "error with comment length <br>";
+    // echo strlen($_POST['commentContent']);
+    echo json_encode(array("success" => false));
+
     exit();
 }
 
@@ -33,5 +35,5 @@ $insertNewCommentSqlPrompt = "INSERT INTO cesco_comments (content, USER_FK, POST
 
 $db->query($insertNewCommentSqlPrompt);
 
-echo json_encode(array());
+echo json_encode(array("success" => true));
 ?>

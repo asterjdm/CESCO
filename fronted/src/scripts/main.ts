@@ -3,6 +3,9 @@ import { Post, PostComment } from "./interfaces.ts";
 import { sendVote } from "./sendVote.ts";
 import { amIconnected } from "./amIconnected.ts";
 import { getComments, formateComment } from "./getComments.ts";
+import { submitComment } from "./submitComment.ts";
+
+
 
 async function loadPosts(placeId: string, max: number) {  
     const postsPlace = document.getElementById(placeId);
@@ -33,18 +36,36 @@ export async function vote(postId: number, voteType: number) {
 
 export async function openCommentsPopup(postId: number)
 {
-    const commentsPlace = document.getElementById("commentsContainer");
+    const submitCommentButton = document.getElementById("submitCommentButton") as HTMLButtonElement;
+    const commentsPlace = document.getElementById("commentsContainer") as HTMLDivElement;
+    const commentTextInput = document.getElementById("commentTextInput") as HTMLInputElement;
 
     openPopup("comments-popup");
+
+    submitCommentButton.onclick = ()=> {
+        submitComment(postId, commentTextInput.value)
+        loadCommments(postId, commentsPlace)
+    };
+
+    loadCommments(postId, commentsPlace)
+
+
+}
+
+export async function loadCommments(postId: number, commentsPlace: HTMLDivElement)
+{
+    
     const comments: [PostComment] = await getComments(postId);
 
     let commentEl: HTMLDivElement;
 
+    commentsPlace.innerHTML = "";
     comments.forEach(async (comment: PostComment) => {
         commentEl = await formateComment(comment);
-        commentsPlace?.appendChild(commentEl);
+        commentsPlace.appendChild(commentEl);
     });
 }
+
 
 
 async function main()
