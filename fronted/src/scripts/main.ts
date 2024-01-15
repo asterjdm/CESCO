@@ -44,7 +44,8 @@ export async function openCommentsPopup(postId: number)
 
     submitCommentButton.onclick = ()=> {
         submitComment(postId, commentTextInput.value)
-        loadCommments(postId, commentsPlace)
+        commentTextInput.value = "";
+        loadCommments(postId, commentsPlace);
     };
 
     loadCommments(postId, commentsPlace)
