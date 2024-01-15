@@ -9,10 +9,10 @@ export interface Post {
     votes_positives_count: string;
     votes_neutrals_count: string;
     votes_negatives_count: string;
-    comments: Comment[];
+    comments: PostComment[];
 }
   
-export interface Comment {
+export interface PostComment {
     COMMENT_ID: string;
     USER_FK: string;
     content: string;

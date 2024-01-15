@@ -1,7 +1,8 @@
 import { getPosts, formatePost } from "./getPosts.ts";
-import { Post } from "./interfaces.ts";
+import { Post, PostComment } from "./interfaces.ts";
 import { sendVote } from "./sendVote.ts";
 import { amIconnected } from "./amIconnected.ts";
+import { getComments, formateComment } from "./getComments.ts";
 
 async function loadPosts(placeId: string, max: number) {  
     const postsPlace = document.getElementById(placeId);
@@ -14,8 +15,8 @@ async function loadPosts(placeId: string, max: number) {
 
     let postDiv: HTMLDivElement;
 
-    postsData.forEach((post: Post) => {
-        postDiv = formatePost(post);
+    postsData.forEach(async (post: Post) => {
+        postDiv = await formatePost(post);
         postsPlace.appendChild(postDiv);
     });
 }
@@ -29,6 +30,22 @@ export async function vote(postId: number, voteType: number) {
         voteCounter.textContent = responseData.votes_count;
     }
 }
+
+export async function openCommentsPopup(postId: number)
+{
+    const commentsPlace = document.getElementById("commentsContainer");
+
+    openPopup("comments-popup");
+    const comments: [PostComment] = await getComments(postId);
+
+    let commentEl: HTMLDivElement;
+
+    comments.forEach(async (comment: PostComment) => {
+        commentEl = await formateComment(comment);
+        commentsPlace?.appendChild(commentEl);
+    });
+}
+
 
 async function main()
 {
@@ -53,6 +70,7 @@ async function main()
 
     }
 }
+
 
 
 main();

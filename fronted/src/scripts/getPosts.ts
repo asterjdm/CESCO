@@ -1,5 +1,6 @@
 import { Post } from "./interfaces.ts"
 import { vote } from "./main.ts";
+import { openCommentsPopup } from "./main.ts";
 
 export async function getPosts(max: number): Promise<[Post]>
 {
@@ -10,7 +11,7 @@ export async function getPosts(max: number): Promise<[Post]>
 }
 
 
-export function formatePost(postData: Post): HTMLDivElement {
+export async function formatePost(postData: Post): Promise<HTMLDivElement> {
     let postDiv = document.createElement('div');
     postDiv.id = `post_${postData.ID}`;
     postDiv.className = 'supra-post';
@@ -51,7 +52,7 @@ export function formatePost(postData: Post): HTMLDivElement {
 
     let commentsButton = document.createElement('button');
     commentsButton.className = 'post-message-footer-button except';
-    commentsButton.onclick// = () => openCommentsPopup(postData.ID);
+    commentsButton.onclick = () => openCommentsPopup(Number(postData.ID));
 
     let commentsButtonImg = document.createElement('img');
     commentsButtonImg.className = 'post-message-footer-button-img';
