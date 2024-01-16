@@ -76,20 +76,19 @@ async function main()
     const isConnected = await amIconnected();
     
     if(isConnected) {
-        const loggedButtons: HTMLElement|null = document.getElementById("loggedButtons");
+        const loggedButtonsList: NodeListOf<HTMLElement> = document.querySelectorAll("#loggedButtons");
 
-        if (loggedButtons != null)
-        {
-            loggedButtons.style.display = "block";
-        }
+        loggedButtonsList.forEach(async loggedButtons => {
+                loggedButtons.style.display = "block";
+        });
+
     } else {
-        const guestButtons: HTMLElement|null = document.getElementById("guestButtons");
 
-        if (guestButtons != null)
-        {
+        const guestButtonsList: NodeListOf<HTMLElement> = document.querySelectorAll("#guestButtons");
+        
+        guestButtonsList.forEach(async guestButtons => {
             guestButtons.style.display = "block";
-        }
-
+        });
     }
 }
 

@@ -64,8 +64,12 @@
               <option value="positiveVotes">Avec le plus de votes positifs en premier</option>
               <option value="oldest">Les plus anciens en premier</option>
           </select>
-          <button class="post-div-new"><img class="post-div-new-img" src="./public/new.svg" alt="new post button"></button>
-          <button id="refreshButton" class="post-div-refresh"></button>
+
+          <div id="loggedButtons" style="display: none;">
+            <button onclick="openPopup('editor-popup')" class="post-div-new"><img class="post-div-new-img" src="./public/new.svg" alt="new post button"></button>
+          </div>
+          
+          <!-- <button id="refreshButton" class="post-div-refresh"><img class="post-div-new-img" src="./public/refresh.svg" alt="new post button"></button> -->
       </div>
 
         <div class="post-scroll" id="postsPlace">
