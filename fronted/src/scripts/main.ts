@@ -4,7 +4,11 @@ import { sendVote } from "./sendVote.ts";
 import { amIconnected } from "./amIconnected.ts";
 import { getComments, formateComment } from "./getComments.ts";
 import { submitComment } from "./submitComment.ts";
+import { sendConnection } from "./sendConnection.ts";
+import { sendNewPost } from "./sendNewPost.ts";
 
+const submitConnectionButton = document.getElementById("submitConnectionButton") as HTMLButtonElement;
+const submitNewPostButton = document.getElementById("newPostSubmitButton") as HTMLButtonElement
 
 
 async function loadPosts(placeId: string, max: number) {  
@@ -90,6 +94,61 @@ async function main()
             guestButtons.style.display = "block";
         });
     }
+
+
+    submitConnectionButton.addEventListener("click", async function (event: Event) 
+    {
+        const connectionPopup = document.getElementById("signin-popup") as HTMLDivElement;
+
+        const usernameInput = connectionPopup.querySelector("#usernameInput") as HTMLInputElement;
+        const passwordInput = connectionPopup.querySelector("#passwordInput") as HTMLInputElement;
+
+        const username = usernameInput.value;
+        const password = passwordInput.value;
+
+        const response = await sendConnection(username, password);
+
+        if (response.success) {
+            location.reload();
+        } else {
+            const messagePlace = connectionPopup.querySelector('#message') as HTMLElement;
+
+            if (messagePlace) {
+                console.log("fake password");
+                messagePlace.innerHTML = "Mot de Passe ou Nom d'Utilisateur <strike>inkorècktte</strike> <b>incorrect</b> !";
+            }
+        }
+
+    });
+
+    submitNewPostButton.addEventListener("click", async function(event)
+    {
+        const newPostPopup = document.getElementById("editor-popup") as HTMLDivElement;
+        const editorDiv = newPostPopup.querySelector("#postContentEditorDiv") as HTMLDivElement;
+        const imagesInput = newPostPopup.querySelector("#imageUploadInput") as HTMLInputElement;
+
+        const imagesFiles = imagesInput.files as FileList;
+        let uploadImageFile;
+
+        if (imagesFiles.length >= 1) {
+            uploadImageFile = imagesFiles[0];
+        } else {
+            uploadImageFile = null;
+        }
+
+        const postContent = editorDiv.innerHTML;
+
+        const response = await sendNewPost(postContent, uploadImageFile);
+
+        if (response.success) {
+            location.reload();
+        } else {
+            const messagePlace = newPostPopup.querySelector("#message") as HTMLElement;
+            if (messagePlace) {
+                messagePlace.innerHTML = "Un problème est survenu...";
+            }
+        }
+    });
 }
 
 

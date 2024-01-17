@@ -5,7 +5,7 @@ const imgButtonText = editorPopup.querySelector("#imgButtonText") as HTMLElement
 
 const postLengthEl = document.getElementById("postLength") as HTMLElement;
 const postContentEditorEl = document.getElementById("postContentEditorDiv") as HTMLDivElement;
-const addImgInput = document.getElementById("images-upload-input") as HTMLInputElement;
+const addImgInput = document.getElementById("imageUploadInput") as HTMLInputElement;
 const addImgLabel = document.getElementById("imageBtnLabel") as HTMLInputElement;
 
 const settingsPopup = document.getElementById("settings-popup") as HTMLDivElement;
@@ -21,79 +21,79 @@ const settingsProfileImageInput = document.getElementById("settingsProfileImageI
 // }
 
 
-async function sendConnection() {
-    const signinForm = document.getElementById("signinForm") as HTMLFormElement;
+// async function sendConnection() {
+//     const signinForm = document.getElementById("signinForm") as HTMLFormElement;
 
-    if (!signinForm) return;
+//     if (!signinForm) return;
 
-    const usernameInput = signinForm.querySelector("#usernameInput") as HTMLInputElement;
-    const passwordInput = signinForm.querySelector("#passwordInput") as HTMLInputElement;
+//     const usernameInput = signinForm.querySelector("#usernameInput") as HTMLInputElement;
+//     const passwordInput = signinForm.querySelector("#passwordInput") as HTMLInputElement;
 
-    if (!usernameInput || !passwordInput) return;
+//     if (!usernameInput || !passwordInput) return;
 
-    const username = usernameInput.value;
-    const password = passwordInput.value;
+//     const username = usernameInput.value;
+//     const password = passwordInput.value;
 
-    const formData = new FormData();
-    formData.append('username', username);
-    formData.append('password', password);
+//     const formData = new FormData();
+//     formData.append('username', username);
+//     formData.append('password', password);
 
-    try {
-        const response = await fetch(`https://rmbi.ch/cesco/api/connection.php`, {
-            method: "POST",
-            body: formData,
-            credentials: "include"
-        });
+//     try {
+//         const response = await fetch(`https://rmbi.ch/cesco/api/connection.php`, {
+//             method: "POST",
+//             body: formData,
+//             credentials: "include"
+//         });
 
-        const responseData = await response.json();
+//         const responseData = await response.json();
 
-        if (responseData.success) {
-            location.reload();
-        } else {
-            const signinPopup = document.getElementById("signin-popup") as HTMLElement;
-            const messagePlace = signinPopup?.querySelector('#message') as HTMLElement;
+//         if (responseData.success) {
+//             location.reload();
+//         } else {
+//             const signinPopup = document.getElementById("signin-popup") as HTMLElement;
+//             const messagePlace = signinPopup?.querySelector('#message') as HTMLElement;
 
-            if (messagePlace) {
-                console.log("fake password");
-                messagePlace.innerHTML = "Mot de Passe ou Nom d'Utilisateur <strike>inkorècktte</strike> <b>incorrect</b> !";
-            }
-        }
-    } catch (error) {
-        console.error("Error during login:", error);
-    }
-}
+//             if (messagePlace) {
+//                 console.log("fake password");
+//                 messagePlace.innerHTML = "Mot de Passe ou Nom d'Utilisateur <strike>inkorècktte</strike> <b>incorrect</b> !";
+//             }
+//         }
+//     } catch (error) {
+//         console.error("Error during login:", error);
+//     }
+// }
 
-async function sendNewPost() 
-{
-    const postContentEditor = postContentEditorEl.innerHTML;
-    const postImageFiles = addImgInput.files;
+// async function sendNewPost() 
+// {
+//     const postContentEditor = postContentEditorEl.innerHTML;
+//     const postImageFiles = addImgInput.files;
 
-    const formData = new FormData();
-    formData.append('postContent', postContentEditor);
+//     const formData = new FormData();
+//     formData.append('postContent', postContentEditor);
 
-    if (postImageFiles && postImageFiles.length > 0) {
-        formData.append('postImage', postImageFiles[0]);
-    }
+//     if (postImageFiles && postImageFiles.length > 0) {
+//         formData.append('postImage', postImageFiles[0]);
+//     }
 
 
-    const response = await fetch(`https://rmbi.ch/cesco/api/newPost.php`, {
-        method: "POST",
-        body: formData,
-        credentials: "include"
-    });
+//     const response = await fetch(`https://rmbi.ch/cesco/api/newPost.php`, {
+//         method: "POST",
+//         body: formData,
+//         credentials: "include"
+//     });
 
-    const responseData = await response.json();
+//     const responseData = await response.json();
 
-    if (responseData.success) {
-        location.reload();
-    } else {
-        const messagePlace = editorPopup?.querySelector("#message") as HTMLElement;
-        if (messagePlace) {
-            messagePlace.innerHTML = "Un problème est survenu...";
-        }
-    }
+//     if (responseData.success) {
+//         location.reload();
+//     } else {
+//         const messagePlace = editorPopup?.querySelector("#message") as HTMLElement;
+//         if (messagePlace) {
+//             messagePlace.innerHTML = "Un problème est survenu...";
+//         }
+//     }
 
-}
+// }
 
 async function updateSettings()
 {

@@ -113,16 +113,18 @@
               <h1 class="popup-content-title special">Nouveau post</h1>
   
                 <div id="editorForm" style="display: contents;">
-                    <div id="postContentEditorDiv" contenteditable="true" class="popup-content-textarea" > </div>
+                    <div id="postContentEditorDiv" contenteditable="true" class="popup-content-textarea" > 
+
+                    </div>
     
                     <footer class="popup-content-footer">
     
                         <div class="popup-content-footer-buttons">
     
-                            <label id="imageBtnLabel" class="popup-content-footer-button" for="images-upload-input">
+                            <label id="imageBtnLabel" class="popup-content-footer-button" for="imageUploadInput">
                                 <p id="imgButtonText">Image</p>
                             </label>
-                            <input class="file-upload-input" onchange="postsImageChangeHandler()" name="postImage" id="images-upload-input" type="file"/>
+                            <input class="file-upload-input" onchange="postsImageChangeHandler()" name="postImage" id="imageUploadInput" type="file"/>
     
                             <button type="button" onclick="formateText('bold')" class="popup-content-footer-button">Gras</button>
                             <button type="button" onclick="formateText('italic')" class="popup-content-footer-button">Italique</button>
@@ -130,7 +132,7 @@
 
                         </div>
     
-                        <button onclick="sendNewPost()" id="newPostSubmitButton" class="popup-content-footer-send">Publier</button>
+                        <button onclick="" id="newPostSubmitButton" class="popup-content-footer-send">Publier</button>
                     </footer>    
                     <br>
                     <!-- POST LENGTH COUNTER : -->
@@ -211,7 +213,7 @@
                       <input id="passwordInput" name="password" class="popup-content-inputbox-input" type="password" required="required">
                       <span class="popup-content-inputbox-span">Mot de passe</span>
                   </div>
-                  <button onclick="sendConnection()" class="popup-content-button">Connexion</button>        
+                  <button id="submitConnectionButton" class="popup-content-button">Connexion</button>        
               </div>            
           </div>
       </div>
@@ -229,21 +231,19 @@
               <p style='color:aliceblue;'><b>?php echo $_GET["message"]; ?</b></p>
           </div>
           <div id="popupContentRight" class="popup-content-right">
-              <form action="https://rmbi.ch/cesco/api/newUser.php" method="post" onsubmit="return validateSignup()">
-                  <div class="popup-content-inputbox">
-                      <input name="username" class="popup-content-inputbox-input" type="text" required="required">
-                      <span class="popup-content-inputbox-span">Nom d'utilisateur</span>
-                  </div>
-                  <div class="popup-content-inputbox">
-                      <input id="passwordInput" name="password" class="popup-content-inputbox-input" type="password" required="required">
-                      <span class="popup-content-inputbox-span">Mot de passe</span>
-                  </div>
-                  <div class="popup-content-inputbox">
-                      <input id="passwordValidationInput" class="popup-content-inputbox-input" type="password" required="required">
-                      <span class="popup-content-inputbox-span">Confirmer le mot de passe</span>
-                  </div>
-                  <button type="submit" class="popup-content-button">Connexion</button>        
-              </form>
+                <div class="popup-content-inputbox">
+                    <input id="signup" name="username" class="popup-content-inputbox-input" type="text" required="required">
+                    <span class="popup-content-inputbox-span">Nom d'utilisateur</span>
+                </div>
+                <div class="popup-content-inputbox">
+                    <input id="passwordInput" name="password" class="popup-content-inputbox-input" type="password" required="required">
+                    <span class="popup-content-inputbox-span">Mot de passe</span>
+                </div>
+                <div class="popup-content-inputbox">
+                    <input id="passwordValidationInput" class="popup-content-inputbox-input" type="password" required="required">
+                    <span class="popup-content-inputbox-span">Confirmer le mot de passe</span>
+                </div>
+                <button onclick="sendSignup()" class="popup-content-button">Inscription</button>        
           </div>
       </div>
     </div>
