@@ -156,36 +156,34 @@
         <div id="popupContentLeft" class="popup-content-left">
             <h1 id="popupContentTitle" class="popup-content-title mini">Paramètres</h1>
             <br>
-            <p style='color:aliceblue;'><b>?php echo $_GET["message"]; ?</b></p>
+            <!-- Message : -->
+            <p id="message"></p>
         </div>
 
         <div id="popupContentRight" class="popup-content-right">
 
-            <form  enctype="multipart/form-data" action="https://rmbi.ch/cesco/api/saveSettings.php" method="post">
+            <div class="popup-content-inputbox">
+                <input id="settingsUsername" name="username" maxlength="14" minlength=3 class="popup-content-inputbox-input" type="text">
+                <span class="popup-content-inputbox-span">Changer nom d'utilisateur</span>
+            </div>
+            <div class="popup-content-inputbox">
+                <input id="settingsNewPassword" minlength="8" maxlength="255" name="newPassword" placeholder="Nouveau mot de passe" class="popup-content-inputbox-input" type="password" required="required">
+                <span class="popup-content-inputbox-span">Changer mot de passe</span>
+            </div>
+            <div class="popup-content-inputbox">
+                <input id="settingsOldPassword" name="old-password" class="popup-content-inputbox-input" type="password">
+                <span class="popup-content-inputbox-span">Mot de passe actuel</span>
+            </div>
 
-                <div class="popup-content-inputbox">
-                    <input name="username" maxlength="14" minlength=3 class="popup-content-inputbox-input" type="text">
-                    <span class="popup-content-inputbox-span">Changer nom d'utilisateur</span>
-                </div>
-                <div class="popup-content-inputbox">
-                    <input minlength="8" maxlength="255" name="newPassword" placeholder="Nouveau mot de passe" class="popup-content-inputbox-input" type="password" required="required">
-                    <span class="popup-content-inputbox-span">Changer mot de passe</span>
-                </div>
-                <div class="popup-content-inputbox">
-                    <input name="old-password" class="popup-content-inputbox-input" type="password">
-                    <span class="popup-content-inputbox-span">Mot de passe actuel</span>
-                </div>
+            <label id="imagePreview" class="file-upload-button">
+                <input id="settingsProfileImageInput" class="file-upload-input" name="profile_image" type="file">
+                <span class="popup-content-inputbox-span">Changer d'image de profile</span>
+            </label>
 
-                <label id="imagePreview" class="file-upload-button">
-                    <input id="profileImageInput" class="file-upload-input" name="profile_image" type="file">
-                    <span class="popup-content-inputbox-span">Changer d'image de profile</span>
-                </label>
+            <button onclick="updateSettings()" type="submit" class="popup-content-button">Enregistrer</button>     
 
-                <button type="submit" class="popup-content-button">Enregistrer</button>     
-
-            </form>
         </div>
-
+        
       </div>
     </div>
 

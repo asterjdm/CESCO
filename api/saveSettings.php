@@ -10,7 +10,7 @@ include_once("../config.php");
 $db = new Database();
 
 if(!isset($_SESSION["userId"])){
-    header('Location: ../index.php?popup=signin');
+    echo json_encode(array("success" => false, "error" => "not connected"));
     exit();
 }
 
@@ -22,16 +22,16 @@ if(isset($_POST["username"]) &&  strlen($_POST["username"]) >= 1 && $_POST["user
     $username = $db->escapeStrings(htmlspecialchars($_POST["username"]));
 
     if (strlen($username) > 15 || strlen($username) <= 0){
-        $message = "Une erreur s'est produite.";
-        header('Location: ../index.php?popup=settings&message=' . urlencode($message));
+        echo json_encode(array("success" => false, "error" => "error"));
+
         exit();
     }
 
 
 
     if (containBannedWord(BANNED_WORDS_USERNAMES, $username)) {
-        $message = "Veuillez utiliser un autre nom d'utilisateur.";
-        header('Location: ../index.php?p=settings&message=' . urlencode($message));
+        echo json_encode(array("success" => false, "error" => "banned username"));
+
         exit();
     }
 
@@ -39,8 +39,7 @@ if(isset($_POST["username"]) &&  strlen($_POST["username"]) >= 1 && $_POST["user
     $existingUsernames = $db->select($checkIfUsernameIsAlreadyTakenSqlQuery);
 
     if (count($existingUsernames) > 0) {
-        $message = "Ce nom d'utilisateur est déjà pris, veuillez en utiliser un autre.";
-        header('Location: ../index.php?popup=settings&message=' . urlencode($message));
+        echo json_encode(array("success" => false, "error" => "username already taken"));
         exit();
     }
 
@@ -54,8 +53,7 @@ if(isset($_POST["newPassword"]) &&  strlen($_POST["newPassword"]) >= 1 && isset(
     $oldPassword = $db->escapeStrings($_POST["oldPassword"]);
 
     if (strlen($newPassword) < 8 || strlen($newPassword) >= 255){
-        $message = "Une erreur s'est produite. ";
-        header('Location: ../index.php?popup=settings&message=' . urlencode($message));
+        echo json_encode(array("success" => false, "error" => "error"));
         exit();
     }
 
@@ -66,8 +64,8 @@ if(isset($_POST["newPassword"]) &&  strlen($_POST["newPassword"]) >= 1 && isset(
     $usersResult = $db->select($getUserSqlPrompt);
     
     if (count($usersResult) == 0) {
-        $message = "Ancien mot de passe incorrect.";
-        header('Location: ../index.php?popup=settings&message=' . urlencode($message));
+        echo json_encode(array("success" => false, "error" => "incorrect password"));
+
         exit();
     }
 
@@ -86,31 +84,27 @@ if(isset($_FILES["profile_image"])){
     $fileExtension = "png";
     $uniqueFileName =  "pp_$userId." . $fileExtension;
 
-    $target_file = $_SERVER['DOCUMENT_ROOT'] . "/" . TARGET_UPLOAD_DIR . $uniqueFileName;
+    $target_file = $_SERVER['DOCUMENT_ROOT'] . "/" . TARGET_UPLOAD_PATH . $uniqueFileName;
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
     
-    $fileUrl = $fullDomain . "/" . TARGET_UPLOAD_DIR . $uniqueFileName;
+    $fileUrl = $fullDomain . "/" . TARGET_UPLOAD_PATH . $uniqueFileName;
 
     $check = getimagesize($profilePict["tmp_name"]);
 
     if ($check !== false) {
-        echo "File is an image - " . $check["mime"] . ".<br>";
         $uploadOk = 1;
     } else {
-        echo "File is not an image.<br>";
         $uploadOk = 0;
     }
 
     if ($profilePict["size"] > MAX_IMAGE_SIZE) {
-        echo "Sorry, the file is too large.<br>";
-        echo "File size: " . $profilePict["size"] . "<br>";
-        echo "Maximum size: " . MAX_IMAGE_SIZE . "<br>";
         $uploadOk = 0;
     }
 
     if ($uploadOk == 0) {
-        echo "<br>Sorry, the file was not uploaded.<br>";
+        echo json_encode(array("success" => false, "error" => "image error"));
+        exit();
     } else {
         // Resize the uploaded image
         $resizedImage = imagecreatefromstring(file_get_contents($profilePict["tmp_name"]));
@@ -121,7 +115,7 @@ if(isset($_FILES["profile_image"])){
         imagedestroy($resizedImage);
 
         if($resizedImage == false){
-            echo "error with resizing image.";
+            echo json_encode(array("success" => false, "error" => "image error"));
             exit();
         }
 
@@ -134,6 +128,6 @@ if(isset($_FILES["profile_image"])){
 
 }
 
-$message = "Les paramètres ont été mis à jour !";
-header('Location: ../index.php?popup=settings&message=' . urlencode($message));
+echo json_encode(array("success" => true));
+exit();
 ?>
