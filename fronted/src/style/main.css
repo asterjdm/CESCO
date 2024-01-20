@@ -27,9 +27,9 @@
     --secondary-color: #FFFFFF;
 
     /* SVG COLORS */
-    --popup-content-close-black: url(../public/close.svg);
-    --popup-content-close-white: url(../public/closeWhite.svg);
-    --post-div-refresh: url(../public/refresh.svg);
+    --popup-content-close-black: url(../../public/close.svg);
+    --popup-content-close-white: url(../../public/closeWhite.svg);
+    --post-div-refresh: url(../../public/refresh.svg);
 }
 
 body {

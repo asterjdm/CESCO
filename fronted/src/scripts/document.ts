@@ -16,59 +16,59 @@ const settingsProfileImageInput = document.getElementById("settingsProfileImageI
 
 
 
-async function updateSettings()
-{
-    const newUsername = settingsUsername.value;
-    const newPassword = settingsNewPassword.value;
-    const oldPassword = settingsOldPassword.value;
-    const newProfilePictureFiles = settingsProfileImageInput.files as FileList;
+// async function updateSettings()
+// {
+//     const newUsername = settingsUsername.value;
+//     const newPassword = settingsNewPassword.value;
+//     const oldPassword = settingsOldPassword.value;
+//     const newProfilePictureFiles = settingsProfileImageInput.files as FileList;
 
-    const formData = new FormData();
+//     const formData = new FormData();
 
-    formData.append("username", newUsername);
-    formData.append("newPassword", newPassword);
-    formData.append("oldPassword", oldPassword);
+//     formData.append("username", newUsername);
+//     formData.append("newPassword", newPassword);
+//     formData.append("oldPassword", oldPassword);
 
-    if(newProfilePictureFiles.length >= 1)
-    {
-        formData.append("profile_image", newProfilePictureFiles[0])
-    }
+//     if(newProfilePictureFiles.length >= 1)
+//     {
+//         formData.append("profile_image", newProfilePictureFiles[0])
+//     }
 
-    const response = await fetch(`https://rmbi.ch/cesco/api/saveSettings.php`, {
-        method: "POST",
-        body: formData,
-        credentials: "include"
-    });
+//     const response = await fetch(`https://rmbi.ch/cesco/api/saveSettings.php`, {
+//         method: "POST",
+//         body: formData,
+//         credentials: "include"
+//     });
 
-    const responseData = await response.json();
+//     const responseData = await response.json();
 
-    if (responseData.success) {
-        location.reload();
-    } else {
-        const messagePlace = settingsPopup.querySelector("#message") as HTMLElement;
+//     if (responseData.success) {
+//         location.reload();
+//     } else {
+//         const messagePlace = settingsPopup.querySelector("#message") as HTMLElement;
         
 
-        switch (responseData.error){
-            case "not connected":
-                messagePlace.innerText = "Veuillez vous connectez";
-                break;
-            case "error" || "image error":
-                messagePlace.innerText = "Une erreur s'est produite";
-                break;
-            case "banned username":
-                messagePlace.innerText = "Votre nom d'utilisateur n'est pas acceptable";
-                break;
-            case "username already taken":
-                messagePlace.innerText = "Votre nom d'utilisateur est déjà utilisé, veuillez en choisir un autre";
-                break;
-            case "username already taken":
-                messagePlace.innerText = "Vote mot de passe est incorect";
-                break;
+//         switch (responseData.error){
+//             case "not connected":
+//                 messagePlace.innerText = "Veuillez vous connectez";
+//                 break;
+//             case "error" || "image error":
+//                 messagePlace.innerText = "Une erreur s'est produite";
+//                 break;
+//             case "banned username":
+//                 messagePlace.innerText = "Votre nom d'utilisateur n'est pas acceptable";
+//                 break;
+//             case "username already taken":
+//                 messagePlace.innerText = "Votre nom d'utilisateur est déjà utilisé, veuillez en choisir un autre";
+//                 break;
+//             case "username already taken":
+//                 messagePlace.innerText = "Vote mot de passe est incorect";
+//                 break;
 
 
-        }
-    }
-}
+//         }
+//     }
+// }
 
 function onPostEditorChange() {
     const postLength = (postContentEditorEl.innerHTML || "").length;

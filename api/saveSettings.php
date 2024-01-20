@@ -52,7 +52,7 @@ if(isset($_POST["newPassword"]) &&  strlen($_POST["newPassword"]) >= 1 && isset(
     $newPassword = $db->escapeStrings($_POST["newPassword"]);
     $oldPassword = $db->escapeStrings($_POST["oldPassword"]);
 
-    if (strlen($newPassword) < 8 || strlen($newPassword) >= 255){
+    if (strlen($newPassword) >= 255){
         echo json_encode(array("success" => false, "error" => "error"));
         exit();
     }

@@ -6,9 +6,12 @@ import { getComments, formateComment } from "./getComments.ts";
 import { submitComment } from "./submitComment.ts";
 import { sendConnection } from "./sendConnection.ts";
 import { sendNewPost } from "./sendNewPost.ts";
+import { updateSettings } from "./sendSettings.ts";
+
 
 const submitConnectionButton = document.getElementById("submitConnectionButton") as HTMLButtonElement;
 const submitNewPostButton = document.getElementById("newPostSubmitButton") as HTMLButtonElement
+const submitSettingsButton = document.getElementById("submitSettingsButton") as HTMLButtonElement
 
 
 async function loadPosts(placeId: string, max: number) {  
@@ -149,8 +152,58 @@ async function main()
             }
         }
     });
-}
 
+    submitSettingsButton.addEventListener("click", async function() {
+        const settingsPopup = document.getElementById("settings-popup") as HTMLDivElement;
+        const newUsernameInput = settingsPopup.querySelector("#newUsernameInput") as HTMLInputElement;
+        const newPasswordInput = settingsPopup.querySelector("#newPasswordInput") as HTMLInputElement;
+        const oldPasswordInput = settingsPopup.querySelector("#oldPasswordInput") as HTMLInputElement;
+        const profileImageInput = settingsPopup.querySelector("#profileImageInput") as HTMLInputElement;
+
+        const newUsername = newUsernameInput.value;
+        const newPassword = newPasswordInput.value;
+        const oldPassword = oldPasswordInput.value;
+        const profileImageFiles = profileImageInput.files as FileList;
+
+        let response: any
+
+        if(profileImageFiles.length >= 1)
+        {
+            response = await updateSettings(newUsername, newPassword, oldPassword, profileImageFiles[0]);
+        } else {
+            response = await updateSettings(newUsername, newPassword, oldPassword, null);
+        }
+
+        if (response.success) {
+            location.reload();
+        } else {
+            const messagePlace = settingsPopup.querySelector("#message") as HTMLElement;
+            
+
+            switch (response.error){
+                case "not connected":
+                    messagePlace.innerText = "Veuillez vous connectez";
+                    break;
+                case "error" || "image error":
+                    messagePlace.innerText = "Une erreur s'est produite";
+                    break;
+                case "banned username":
+                    messagePlace.innerText = "Votre nom d'utilisateur n'est pas acceptable";
+                    break;
+                case "username already taken":
+                    messagePlace.innerText = "Votre nom d'utilisateur est déjà utilisé, veuillez en choisir un autre";
+                    break;
+                case "incorrect password":
+                    messagePlace.innerText = "Vote mot de passe est incorect";
+                    break;
+
+
+            }
+        }
+
+
+    })
+}
 
 
 main();
