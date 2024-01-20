@@ -2,7 +2,6 @@ import { getPosts, formatePost } from "./getPosts.ts";
 import { Post, PostComment } from "./interfaces.ts";
 import { sendVote } from "./sendVote.ts";
 import { amIconnected } from "./amIconnected.ts";
-import { getComments, formateComment } from "./getComments.ts";
 import { submitComment } from "./submitComment.ts";
 import { sendConnection } from "./sendConnection.ts";
 import { sendNewPost } from "./sendNewPost.ts";
@@ -20,6 +19,8 @@ const settingsPopup = document.getElementById("settings-popup") as HTMLDivElemen
 const newPostEditorDiv = newPostPopup.querySelector("#postContentEditorDiv") as HTMLDivElement;
 const imageUploadInput = newPostPopup.querySelector("#imageUploadInput") as HTMLInputElement;
 
+
+
 async function loadPosts(placeId: string, max: number) {  
     const postsPlace = document.getElementById(placeId);
 
@@ -36,50 +37,6 @@ async function loadPosts(placeId: string, max: number) {
         postsPlace.appendChild(postDiv);
     });
 }
-
-export async function vote(postId: number, voteType: number) {
-    const responseData = await sendVote(postId, voteType);
-    
-    const voteCounter = document.getElementById(`post_${postId}`)?.querySelector(`#votes_count_${voteType}`);
-    
-    if (voteCounter) {
-        voteCounter.textContent = responseData.votes_count;
-    }
-}
-
-export async function openCommentsPopup(postId: number)
-{
-    const submitCommentButton = document.getElementById("submitCommentButton") as HTMLButtonElement;
-    const commentsPlace = document.getElementById("commentsContainer") as HTMLDivElement;
-    const commentTextInput = document.getElementById("commentTextInput") as HTMLInputElement;
-
-    openPopup("comments-popup");
-
-    submitCommentButton.onclick = ()=> {
-        submitComment(postId, commentTextInput.value)
-        commentTextInput.value = "";
-        loadCommments(postId, commentsPlace);
-    };
-
-    loadCommments(postId, commentsPlace)
-
-
-}
-
-export async function loadCommments(postId: number, commentsPlace: HTMLDivElement)
-{
-    
-    const comments: [PostComment] = await getComments(postId);
-
-    let commentEl: HTMLDivElement;
-
-    commentsPlace.innerHTML = "";
-    comments.forEach(async (comment: PostComment) => {
-        commentEl = await formateComment(comment);
-        commentsPlace.appendChild(commentEl);
-    });
-}
-
 
 
 async function main()

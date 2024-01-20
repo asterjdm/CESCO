@@ -1,6 +1,6 @@
 import { Post } from "./interfaces.ts"
-import { vote } from "./main.ts";
-import { openCommentsPopup } from "./main.ts";
+import { vote } from "./vote.ts";
+import { openCommentsPopup } from "./openCommentsPopup.ts";
 import { report } from "./report.ts";
 
 
