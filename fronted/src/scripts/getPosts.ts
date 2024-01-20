@@ -1,6 +1,11 @@
 import { Post } from "./interfaces.ts"
 import { vote } from "./main.ts";
 import { openCommentsPopup } from "./main.ts";
+import { report } from "./report.ts";
+
+
+
+
 
 export async function getPosts(max: number): Promise<[Post]>
 {

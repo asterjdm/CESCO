@@ -7,12 +7,18 @@ import { submitComment } from "./submitComment.ts";
 import { sendConnection } from "./sendConnection.ts";
 import { sendNewPost } from "./sendNewPost.ts";
 import { updateSettings } from "./sendSettings.ts";
-
+import { onPostEditorChange, postsImageChangeHandler } from "./postsEditor.ts";
 
 const submitConnectionButton = document.getElementById("submitConnectionButton") as HTMLButtonElement;
 const submitNewPostButton = document.getElementById("newPostSubmitButton") as HTMLButtonElement
 const submitSettingsButton = document.getElementById("submitSettingsButton") as HTMLButtonElement
 
+const connectionPopup = document.getElementById("signin-popup") as HTMLDivElement;
+const newPostPopup = document.getElementById("editor-popup") as HTMLDivElement;
+const settingsPopup = document.getElementById("settings-popup") as HTMLDivElement;
+
+const newPostEditorDiv = newPostPopup.querySelector("#postContentEditorDiv") as HTMLDivElement;
+const imageUploadInput = newPostPopup.querySelector("#imageUploadInput") as HTMLInputElement;
 
 async function loadPosts(placeId: string, max: number) {  
     const postsPlace = document.getElementById(placeId);
@@ -101,8 +107,6 @@ async function main()
 
     submitConnectionButton.addEventListener("click", async function (event: Event) 
     {
-        const connectionPopup = document.getElementById("signin-popup") as HTMLDivElement;
-
         const usernameInput = connectionPopup.querySelector("#usernameInput") as HTMLInputElement;
         const passwordInput = connectionPopup.querySelector("#passwordInput") as HTMLInputElement;
 
@@ -126,8 +130,6 @@ async function main()
 
     submitNewPostButton.addEventListener("click", async function(event)
     {
-        const newPostPopup = document.getElementById("editor-popup") as HTMLDivElement;
-        const editorDiv = newPostPopup.querySelector("#postContentEditorDiv") as HTMLDivElement;
         const imagesInput = newPostPopup.querySelector("#imageUploadInput") as HTMLInputElement;
 
         const imagesFiles = imagesInput.files as FileList;
@@ -139,7 +141,7 @@ async function main()
             uploadImageFile = null;
         }
 
-        const postContent = editorDiv.innerHTML;
+        const postContent = newPostEditorDiv.innerHTML;
 
         const response = await sendNewPost(postContent, uploadImageFile);
 
@@ -154,7 +156,6 @@ async function main()
     });
 
     submitSettingsButton.addEventListener("click", async function() {
-        const settingsPopup = document.getElementById("settings-popup") as HTMLDivElement;
         const newUsernameInput = settingsPopup.querySelector("#newUsernameInput") as HTMLInputElement;
         const newPasswordInput = settingsPopup.querySelector("#newPasswordInput") as HTMLInputElement;
         const oldPasswordInput = settingsPopup.querySelector("#oldPasswordInput") as HTMLInputElement;
@@ -203,6 +204,9 @@ async function main()
 
 
     })
+    
+    newPostEditorDiv.addEventListener("input", onPostEditorChange)
+    imageUploadInput.addEventListener("change", postsImageChangeHandler)
 }
 
 
