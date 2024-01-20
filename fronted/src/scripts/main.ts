@@ -1,5 +1,3 @@
-import { getPosts, formatePost } from "./getPosts.ts";
-import { Post } from "./interfaces.ts";
 import { amIconnected } from "./amIconnected.ts";
 import { sendConnection } from "./sendConnection.ts";
 import { sendNewPost } from "./sendNewPost.ts";
@@ -45,7 +43,7 @@ async function main()
     }
 
 
-    submitConnectionButton.addEventListener("click", async function (event: Event) 
+    submitConnectionButton.addEventListener("click", async function () 
     {
         const usernameInput = connectionPopup.querySelector("#usernameInput") as HTMLInputElement;
         const passwordInput = connectionPopup.querySelector("#passwordInput") as HTMLInputElement;
@@ -68,7 +66,7 @@ async function main()
 
     });
 
-    submitNewPostButton.addEventListener("click", async function(event)
+    submitNewPostButton.addEventListener("click", async function()
     {
         const imagesInput = newPostPopup.querySelector("#imageUploadInput") as HTMLInputElement;
 

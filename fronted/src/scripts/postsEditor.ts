@@ -28,9 +28,9 @@ export async function onPostEditorChange() {
     }
 }
 
-async function formateText(command: string, value: string) {
-    document.execCommand(command, false, value);
-}
+// async function formateText(command: string, value: string) {
+//     document.execCommand(command, false, value);
+// }
 
 
 export async function postsImageChangeHandler() {
