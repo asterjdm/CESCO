@@ -1,4 +1,5 @@
 import { addPosts } from "./addPosts";
+import { follow } from "./follow";
 import { getUser } from "./getUser";
 
 export async function openUserProfile(userId: number) {
@@ -25,11 +26,25 @@ export async function openUserProfile(userId: number) {
     const mySession = await response.json();
     const myId = mySession.userId;
 
+    followButton.onclick = function(){};
+    
     if(myId != null) {
+        followButton.onclick = () => handleFollowButtonClick(followButton, userId)
+
         if(user.following.some((item: any) => item.followed_user_id == user.ID)) {
             followButton.innerText = "unFollow";
         } else {
             followButton.innerText = "Follow";
         }
+    }
+}
+
+async function handleFollowButtonClick(followButton: HTMLButtonElement, userId:number) {
+    const response = await (await follow(userId)).json();
+    if(response.message == "followed") {
+        followButton.innerText = "unFollow";
+    }else if(response.message == "unfollowed") {
+        followButton.innerText = "Follow";
+
     }
 }

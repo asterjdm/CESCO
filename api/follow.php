@@ -31,7 +31,7 @@ if(count($userFollowing) >= 1){
     $db -> query($removeFollowingSql);
 
     http_response_code(200);
-    echo json_encode(array("message" => "follow-up has been deleted"));
+    echo json_encode(array("message" => "unfollowed"));
 
     exit();
 
@@ -39,7 +39,7 @@ if(count($userFollowing) >= 1){
     $insertFollowingSql = "INSERT INTO cesco_followers (follower_id, followed_id) VALUES ('$userId', '$id')";
 
     http_response_code(200);
-    echo json_encode(array("message" => "successfully followed"));
+    echo json_encode(array("message" => "followed"));
     
     $db -> query($insertFollowingSql);
 }
