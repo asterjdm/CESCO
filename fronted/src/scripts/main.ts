@@ -1,8 +1,6 @@
 import { getPosts, formatePost } from "./getPosts.ts";
-import { Post, PostComment } from "./interfaces.ts";
-import { sendVote } from "./sendVote.ts";
+import { Post } from "./interfaces.ts";
 import { amIconnected } from "./amIconnected.ts";
-import { submitComment } from "./submitComment.ts";
 import { sendConnection } from "./sendConnection.ts";
 import { sendNewPost } from "./sendNewPost.ts";
 import { updateSettings } from "./sendSettings.ts";
