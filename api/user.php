@@ -1,4 +1,6 @@
 <?php
+    include('api_config.php');
+
     header('Content-Type: application/json; charset=utf-8');
     include_once("utils/database.php");
 

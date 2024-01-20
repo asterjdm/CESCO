@@ -2,14 +2,26 @@ import { Post } from "./interfaces.ts"
 import { vote } from "./vote.ts";
 import { openCommentsPopup } from "./openCommentsPopup.ts";
 import { report } from "./report.ts";
+import { openUserProfile } from "./openUserProfile.ts";
 
 
 
 
-
-export async function getPosts(max: number): Promise<[Post]>
+export async function getPosts(max: number|null, userId: number|null): Promise<[Post]>
 {
-    const response = await fetch(`https://rmbi.ch/cesco/api/posts.php?max=${max}`);
+    const urlParams = new URLSearchParams();
+
+    if (max) {
+        urlParams.append('max', max.toString());
+    }
+    if (userId) {
+        urlParams.append('userId', userId.toString());
+    }
+
+    const response = await fetch(`https://rmbi.ch/cesco/api/posts.php?${urlParams}`, {
+        method: "GET"
+    });
+
     const posts = await response.json();
 
     return posts;
@@ -34,7 +46,7 @@ export async function formatePost(postData: Post): Promise<HTMLDivElement> {
     postMessageDivPicture.width = 55;
     postMessageDivPicture.height = 55;
     postMessageDivPicture.alt = `${postData.author} profile picture`;
-    postMessageDivPicture.onclick// = () => openUserPagePopup(postData.USER_FK);
+    postMessageDivPicture.onclick = () => openUserProfile(Number(postData.USER_FK));
 
     let postMessageDivInfos = document.createElement('div');
     postMessageDivInfos.className = 'post-message-div-infos';

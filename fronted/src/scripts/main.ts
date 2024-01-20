@@ -5,6 +5,8 @@ import { sendConnection } from "./sendConnection.ts";
 import { sendNewPost } from "./sendNewPost.ts";
 import { updateSettings } from "./sendSettings.ts";
 import { onPostEditorChange, postsImageChangeHandler } from "./postsEditor.ts";
+import { addPosts } from "./addPosts.ts";
+
 
 const submitConnectionButton = document.getElementById("submitConnectionButton") as HTMLButtonElement;
 const submitNewPostButton = document.getElementById("newPostSubmitButton") as HTMLButtonElement
@@ -19,27 +21,10 @@ const imageUploadInput = newPostPopup.querySelector("#imageUploadInput") as HTML
 
 
 
-async function loadPosts(placeId: string, max: number) {  
-    const postsPlace = document.getElementById(placeId);
-
-    if (!postsPlace) {
-        throw new Error("Posts place Id is null");
-    }
-
-    const postsData = await getPosts(max);
-
-    let postDiv: HTMLDivElement;
-
-    postsData.forEach(async (post: Post) => {
-        postDiv = await formatePost(post);
-        postsPlace.appendChild(postDiv);
-    });
-}
-
 
 async function main()
 {
-    loadPosts("postsPlace", 30);
+    addPosts("postsPlace", 30, null);
 
     const isConnected = await amIconnected();
     
