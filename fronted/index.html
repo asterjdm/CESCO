@@ -28,15 +28,15 @@
         <div id="loggedButtons" style="display: none;">
 
           <a id="disconnectButton" class="header-link" onclick="window.open('https://rmbi.ch/cesco/api/disconnect.php'); location.reload();">Déconnexion</a>
-          <a id="newPostButton" class="header-link" onclick="openPopup('editor-popup')">Nouveau</a>
-          <a id="settingsButton" class="header-link" onclick="openPopup('settings-popup')">Paramètres</a>
+          <a id="newPostButton" class="header-link" >Nouveau</a>
+          <a id="settingsButton" class="header-link" >Paramètres</a>
 
         </div>
 
         <div id="guestButtons" style="display: none;">
 
-          <a id="signinButton" class="header-link" onclick="openPopup('signin-popup')">Connexion</a>
-          <a id="signupButton" class="header-link" onclick="openPopup('signup-popup')">Inscription</a> 
+          <a id="signinButton" class="header-link">Connexion</a>
+          <a id="signupButton" class="header-link">Inscription</a> 
 
         </div>
 
@@ -65,7 +65,7 @@
           </select>
 
           <div id="loggedButtons" style="display: none;">
-            <button onclick="openPopup('editor-popup')" class="post-div-new"><img class="post-div-new-img" src="./public/new.svg" alt="new post button"></button>
+            <button id="newPostButton" class="post-div-new"><img class="post-div-new-img" src="./public/new.svg" alt="new post button"></button>
           </div>
           
           <!-- <button id="refreshButton" class="post-div-refresh"><img class="post-div-new-img" src="./public/refresh.svg" alt="new post button"></button> -->
@@ -228,7 +228,7 @@
   
           <div class="popup-content-left">
               <h1 class="popup-content-title">Connexion</h1>
-              <a class="popup-content-link" onclick="closePopup('signin-popup'); openPopup('signup-popup')">Pas de compte ?</a>
+              <a class="popup-content-link" id="noAccountButton">Pas de compte ?</a>
               <br>
               <p id="message" style='color:rgb(255, 0, 0);'>  </p>
           </div>
@@ -256,7 +256,7 @@
           <button class="popup-content-close" onclick="closePopup('signup-popup')"></button>
           <div id="popupContentLeft" class="popup-content-left">
               <h1 id="popupContentTitle" class="popup-content-title">Inscription</h1>
-              <a id="popupContentLink" class="popup-content-link" onclick="closePopup('signup-popup'); openPopup('signin-popup')">Pas de compte ?</a>
+              <a class="popup-content-link" id="alreadyHaveAccountButton">Déjà un compte ?</a>
               <br>
               <p style='color:aliceblue;'><b>?php echo $_GET["message"]; ?</b></p>
           </div>

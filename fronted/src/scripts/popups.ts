@@ -1,6 +1,6 @@
 
 
-async function openPopup(popupId: string)
+export async function openPopup(popupId: string)
 {
     document.body.style.overflow = "hidden";
     const popup = document.getElementById(popupId);
@@ -13,7 +13,7 @@ async function openPopup(popupId: string)
     popup.classList.add("show");
 }
 
-async function closePopup(popupId: string) {
+export async function closePopup(popupId: string) {
     const hamburgerMenu = document.querySelector('.hamburger-menu');
 
     if (hamburgerMenu == null)

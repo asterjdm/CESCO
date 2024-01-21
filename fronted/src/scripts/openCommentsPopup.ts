@@ -1,4 +1,5 @@
 import { loadCommments } from "./loadCommments";
+import { openPopup } from "./popups";
 import { submitComment } from "./submitComment";
 
 

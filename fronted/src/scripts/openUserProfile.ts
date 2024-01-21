@@ -1,6 +1,7 @@
 import { addPosts } from "./addPosts";
 import { follow } from "./follow";
 import { getUser } from "./getUser";
+import { openPopup } from "./popups";
 
 export async function openUserProfile(userId: number) {
     const profilePopup = document.getElementById("profile-popup") as HTMLDivElement;
