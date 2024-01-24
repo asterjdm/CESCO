@@ -13,11 +13,14 @@ def newUser():
     username = request.args["username"]
     password = request.args["password"]
     
-    if username and password:
-        return insertNewUser(username, password)
-    else:
-        return jsonify({"error":"Invalid input. Provide username and password."})
+    return insertNewUser(username, password)
 
+@app.route('/connection', methods=[ 'GET'])
+def connection():
+    username = request.args["username"]
+    password = request.args["password"]
+    
+    return connect(username, password)
 
 if __name__ == '__main__':
     app.run(debug=True)
