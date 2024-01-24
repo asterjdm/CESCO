@@ -1,8 +1,6 @@
-from argon2 import PasswordHasher
+import hashlib
 
 def hashPassword(password):
-    ph = PasswordHasher()
+    hashed_password = hashlib.md5(password.encode("ASCII"))
 
-    hashed_password = ph.hash(password)
-
-    return hashed_password
+    return hashed_password.hexdigest()
