@@ -1,6 +1,6 @@
-from flask import Flask, request, jsonify
-from src.newPost import insertNewPost
+from flask import Flask, request
 from src.newUser import insertNewUser
+from src.connection import connect
 
 app = Flask(__name__)
 
