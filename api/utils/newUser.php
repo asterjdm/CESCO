@@ -27,7 +27,7 @@ function newUser($username, $password) {
     if (!isUsernameValid($safeUsername)) {
         return array("error" => "invalid username");
     } 
-    if (!isPasswordValid($safeUsername)) {
+    if (!isPasswordValid($password)) {
         return array("error" => "invalid password");
     }
     if(isUsernameAlreadyTaken($username)) {

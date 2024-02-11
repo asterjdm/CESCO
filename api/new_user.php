@@ -3,8 +3,8 @@ header('Content-type: application/json');
 
 include_once("utils/newUser.php");
 
-$username = $_POST["username"];
-$password = $_POST["password"];
+$username = $_GET["username"];
+$password = $_GET["password"];
 
 echo json_encode(newUser($username, $password));
 ?>
