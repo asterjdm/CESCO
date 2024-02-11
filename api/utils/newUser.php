@@ -38,7 +38,7 @@ function newUser($username, $password) {
 
     $db -> query("INSERT INTO cesco_users (username, passwd, grade, profile_picture) VALUES ('$safeUsername', '$hashedPassword', 'user', 'profileExample.png')");
 
-    $userInfos = $db->select("SELECT * FROM cesco_users WHERE username = '$username' AND passwd = '$hashedPassword'");
+    $userInfos = $db->select("SELECT * FROM cesco_users WHERE username = '$safeUsername' AND passwd = '$hashedPassword'");
     $userID = $userInfos[0]["ID"];
     $userGrade = $userInfos[0]["grade"];
 
