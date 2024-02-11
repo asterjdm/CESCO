@@ -23,4 +23,5 @@ dist-ssr
 *.sw?
 
 *.db
+*.db-journal
 __pycache__
