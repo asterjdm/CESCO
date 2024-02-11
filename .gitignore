@@ -22,6 +22,4 @@ dist-ssr
 *.sln
 *.sw?
 
-*.db
-*.db-journal
-__pycache__
+secrets.php
