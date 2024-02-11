@@ -4,8 +4,9 @@ include_once(dirname(__FILE__) . "/passwordSecurity.php");
 
 
 function isUsernameValid($username) {
-    return isset($username) && strlen($username) < 15 && strlen($username) >= 3 && !!preg_match("/[a-z0-9]/i", $username);
+    return isset($username) && strlen($username) >= 3 && strlen($username) < 15 && preg_match("/^[a-zA-Z0-9]+$/", $username);
 }
+
 
 function isPasswordValid($password) {
     return isset($password) && strlen($password) < 255;
@@ -47,6 +48,7 @@ function newUser($username, $password) {
     $_SESSION['userID'] = $db->escapeStrings($userID);
     $_SESSION['userGrade'] = $db->escapeStrings($userGrade);
     $_SESSION['username'] = $db->escapeStrings(htmlspecialchars($safeUsername));
+    
     return array("success" => true);
 }
 
