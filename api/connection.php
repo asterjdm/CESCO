@@ -4,8 +4,8 @@ header('Content-type: application/json');
 include_once("utils/connect.php");
 
 
-$username = $_GET["username"];
-$password = $_GET["password"];
+$username = $_POST["username"];
+$password = $_POST["password"];
 
 echo json_encode(connect($username, $password));
 ?>
