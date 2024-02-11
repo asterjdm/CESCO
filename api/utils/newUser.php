@@ -26,13 +26,13 @@ function newUser($username, $password) {
     $safeUsername = $db->escapeStrings($username);
 
     if (!isUsernameValid($safeUsername)) {
-        return array("error" => "invalid username");
+        return array("success" => false, "error" => "invalid username");
     } 
     if (!isPasswordValid($password)) {
-        return array("error" => "invalid password");
+        return array("success" => false, "error" => "invalid password");
     }
     if(isUsernameAlreadyTaken($safeUsername)) {
-        return array("error" => "username already taken");
+        return array("success" => false, "error" => "username already taken");
     }
 
     $hashedPassword = hashPassword($password);
