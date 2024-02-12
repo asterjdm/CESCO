@@ -20,7 +20,7 @@ export async function openUserProfile(userId: number) {
     usernamePlace.innerText = user.username;
     profilePicturePlace.src = user.profile_picture
     
-    const response = await fetch("https://rmbi.ch/cesco/api/getMySession.php", {
+    const response = await fetch("api/getMySession.php", {
         credentials: "include"
     });
     

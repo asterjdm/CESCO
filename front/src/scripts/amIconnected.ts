@@ -3,7 +3,7 @@
 
 export async function amIconnected(): Promise<boolean>
 {
-    const response = await fetch("https://rmbi.ch/cesco/api/amIconnected.php", {
+    const response = await fetch("api/amIconnected.php", {
         credentials: "include"
     });
     

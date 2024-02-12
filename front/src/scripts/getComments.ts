@@ -2,7 +2,7 @@ import { PostComment } from "./interfaces";
 
 export async function getComments(postId: number): Promise<[PostComment]>
 {
-    const response = await fetch(`https://rmbi.ch/cesco/api/posts.php?id=${postId}`);
+    const response = await fetch(`api/posts.php?id=${postId}`);
     const post = await response.json();
     const comments = await post[0].comments
     console.log(comments);

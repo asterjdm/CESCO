@@ -7,7 +7,7 @@ export async function submitComment(postId: number, commentContent: string)
     formData.append('postId', postId.toString());
     formData.append('commentContent', commentContent);
 
-    /*const response = */await fetch("https://rmbi.ch/cesco/api/newComment.php", {
+    /*const response = */await fetch("api/newComment.php", {
         method: "POST",
         body: formData,
         credentials: "include"

@@ -6,7 +6,7 @@ export async function sendConnection(username: string, password: string): Promis
     formData.append('username', username);
     formData.append('password', password);
 
-    const response = await fetch(`https://rmbi.ch/cesco/api/connection.php`, {
+    const response = await fetch(`api/connection.php`, {
         method: "POST",
         body: formData,
         credentials: "include"

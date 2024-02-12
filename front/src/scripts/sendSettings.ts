@@ -19,7 +19,7 @@ export async function updateSettings(newUsername: string|null, newPassword: stri
         formData.append("profile_image", newProfilePicture)
     }
 
-    const response = await fetch(`https://rmbi.ch/cesco/api/saveSettings.php`, {
+    const response = await fetch(`api/saveSettings.php`, {
         method: "POST",
         body: formData,
         credentials: "include"

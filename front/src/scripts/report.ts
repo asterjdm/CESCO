@@ -6,7 +6,7 @@ export async function report(postid: number){
         formData.append('post_id', postid.toString());
         formData.append('reason', reasonUser);
     
-        await fetch("https://rmbi.ch/cesco/api/report.php", {
+        await fetch("api/report.php", {
             method: "POST",
             body: formData
         });

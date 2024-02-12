@@ -4,7 +4,7 @@ export async function follow(userId: number): Promise<any>{
 
     formData.append('id', userId.toString());
 
-    let response = await fetch("https://rmbi.ch/cesco/api/follow.php", {
+    let response = await fetch("api/follow.php", {
         method: "POST", 
         body: formData,
         credentials: "include"

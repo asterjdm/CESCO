@@ -13,7 +13,7 @@ export async function sendNewPost(postContent: string, postImageFile: File|null)
 
     }
  
-    const response = await fetch(`https://rmbi.ch/cesco/api/newPost.php`, {
+    const response = await fetch(`api/newPost.php`, {
         method: "POST",
         body: formData,
         credentials: "include"

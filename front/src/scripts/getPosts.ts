@@ -18,7 +18,7 @@ export async function getPosts(max: number|null, userId: number|null): Promise<[
         urlParams.append('userId', userId.toString());
     }
 
-    const response = await fetch(`https://rmbi.ch/cesco/api/posts.php?${urlParams}`, {
+    const response = await fetch(`api/posts.php?${urlParams}`, {
         method: "GET"
     });
 
