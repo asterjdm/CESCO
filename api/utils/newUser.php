@@ -24,6 +24,7 @@ function newUser($username, $password) {
     $db = new Database();
 
     $safeUsername = $db->escapeStrings($username);
+    $username = null;
 
     if (!isUsernameValid($safeUsername)) {
         return array("success" => false, "error" => "invalid username");

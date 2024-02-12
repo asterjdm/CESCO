@@ -5,6 +5,7 @@ include_once(dirname(__FILE__) . "/passwordSecurity.php");
 function checkCredentials($username, $password) {
     $db = new Database();
     $safeUsername = $db -> escapeStrings($username);
+    $username = null;
 
     $users = $db -> select("SELECT * from cesco_users WHERE username = '$safeUsername'");
 
@@ -21,6 +22,7 @@ function connect($username, $password) {
     $db = new Database();
 
     $safeUsername = $db -> escapeStrings($username);
+    $username = null;
 
     if (!checkCredentials($safeUsername, $password)) {
         return array("success" => false, "error" => "incorrect password");
