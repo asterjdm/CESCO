@@ -3,7 +3,7 @@
 
 export async function amIconnected(): Promise<boolean>
 {
-    const response = await fetch("api/amIconnected.php", {
+    const response = await fetch("api/is_connected.php", {
         credentials: "include"
     });
     
