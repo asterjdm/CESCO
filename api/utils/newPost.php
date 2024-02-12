@@ -24,7 +24,7 @@ function newPost($content) {
 
     $content = strip_tags($content, implode('', $ALLOWED_POST_TAGS));
 
-    $userId = $db->escapeStrings($_SESSION["userId"]);
+    $userId = $db->escapeStrings($_SESSION["userID"]);
 
     $db -> query("INSERT INTO cesco_posts (content, USER_FK) VALUES ('$content', '$userId')");
 
