@@ -1,6 +1,6 @@
 import { amIconnected } from "./amIconnected.ts";
 import { sendConnection } from "./sendConnection.ts";
-import { sendSignup } from "./sendSignup.ts.ts";
+import { sendSignup } from "./sendSignup.ts";
 
 import { sendNewPost } from "./sendNewPost.ts";
 import { updateSettings } from "./sendSettings.ts";
