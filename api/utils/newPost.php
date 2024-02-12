@@ -3,6 +3,7 @@ include_once(dirname(__FILE__) . "/db.php");
 
 
 function newPost($content) {
+    session_start();
     if(!isset($_SESSION["userID"])) {
         return array("success" => false, "error" => "user not connected");
     }
