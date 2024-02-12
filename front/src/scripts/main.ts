@@ -1,5 +1,7 @@
 import { amIconnected } from "./amIconnected.ts";
 import { sendConnection } from "./sendConnection.ts";
+import { sendSignup } from "./sendSignup.ts.ts";
+
 import { sendNewPost } from "./sendNewPost.ts";
 import { updateSettings } from "./sendSettings.ts";
 import { onPostEditorChange, postsImageChangeHandler } from "./postsEditor.ts";
@@ -7,10 +9,12 @@ import { addPosts } from "./addPosts.ts";
 import { closePopup, openPopup } from "./popups.ts";
 
 const submitConnectionButton = document.getElementById("submitConnectionButton") as HTMLButtonElement;
+const submitInscriptionButton = document.getElementById("submitInscriptionButton") as HTMLButtonElement;
 const submitNewPostButton = document.getElementById("newPostSubmitButton") as HTMLButtonElement
 const submitSettingsButton = document.getElementById("submitSettingsButton") as HTMLButtonElement
 
 const connectionPopup = document.getElementById("signin-popup") as HTMLDivElement;
+const inscriptionPopup = document.getElementById("signup-popup") as HTMLDivElement;
 const newPostPopup = document.getElementById("editor-popup") as HTMLDivElement;
 const settingsPopup = document.getElementById("settings-popup") as HTMLDivElement;
 
@@ -87,8 +91,29 @@ submitConnectionButton.addEventListener("click", async function ()
         const messagePlace = connectionPopup.querySelector('#message') as HTMLElement;
 
         if (messagePlace) {
-            console.log("fake password");
             messagePlace.innerHTML = "Mot de Passe ou Nom d'Utilisateur <strike>inkorècktte</strike> <b>incorrect</b> !";
+        }
+    }
+
+});
+
+submitInscriptionButton.addEventListener("click", async function () 
+{
+    const usernameInput = inscriptionPopup.querySelector("#usernameInput") as HTMLInputElement;
+    const passwordInput = inscriptionPopup.querySelector("#passwordInput") as HTMLInputElement;
+
+    const username = usernameInput.value;
+    const password = passwordInput.value;
+
+    const response = await sendSignup(username, password);
+
+    if (response.success) {
+        location.reload();
+    } else {
+        const messagePlace = inscriptionPopup.querySelector('#message') as HTMLElement;
+
+        if (messagePlace) {
+            messagePlace.innerHTML = "Une erreur s'est produite";
         }
     }
 
