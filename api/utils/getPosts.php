@@ -25,9 +25,9 @@ function getPosts($id=null, $search=null, $onlyFollowed=false, $userId=null, $so
             cu.grade AS author_grade FROM cesco_comments AS cc JOIN cesco_users AS cu ON cc.USER_FK = cu.ID WHERE cc.POST_FK = '$postID'";
             $comments = $db->select($getCommentsSql);
             $postData[0]['comments'] = $comments;
-            echo json_encode($postData);
+            return $postData;
         } else {
-            echo json_encode(["error" => "Post not found."]);
+            return ["error" => "Post not found."];
         }
 
     } else {
@@ -90,7 +90,7 @@ function getPosts($id=null, $search=null, $onlyFollowed=false, $userId=null, $so
             $post['comments'] = $comments;
         }
 
-        echo json_encode($data);
+        return $data;
     }
 }
 
