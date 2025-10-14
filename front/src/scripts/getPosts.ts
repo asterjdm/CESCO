@@ -73,7 +73,7 @@ export async function formatePost(postData: Post): Promise<HTMLDivElement> {
 
     let commentsButtonImg = document.createElement('img');
     commentsButtonImg.className = 'post-message-footer-button-img';
-    commentsButtonImg.src = './public/comments.svg';
+    commentsButtonImg.src = './comments.svg';
     commentsButtonImg.alt = 'comment button';
 
     commentsButton.appendChild(commentsButtonImg);
@@ -85,7 +85,7 @@ export async function formatePost(postData: Post): Promise<HTMLDivElement> {
 
     let positiveVotesButtonImg = document.createElement('img');
     positiveVotesButtonImg.className = 'post-message-footer-button-img';
-    positiveVotesButtonImg.src = './public/expandWhite.svg';
+    positiveVotesButtonImg.src = './expandWhite.svg';
     positiveVotesButtonImg.alt = 'comment button';
 
     let positiveVotesCount = document.createElement('p');
@@ -103,7 +103,7 @@ export async function formatePost(postData: Post): Promise<HTMLDivElement> {
 
     let neutralVotesButtonImg = document.createElement('img');
     neutralVotesButtonImg.className = 'post-message-footer-button-img';
-    neutralVotesButtonImg.src = './public/middlevote.svg';
+    neutralVotesButtonImg.src = './middlevote.svg';
     neutralVotesButtonImg.alt = 'comment button';
 
     let neutralVotesCount = document.createElement('p');
@@ -121,7 +121,7 @@ export async function formatePost(postData: Post): Promise<HTMLDivElement> {
     
     let negativeVotesButtonImg = document.createElement('img');
     negativeVotesButtonImg.className = 'post-message-footer-button-img';
-    negativeVotesButtonImg.src = './public/downvote.svg';
+    negativeVotesButtonImg.src = './downvote.svg';
     negativeVotesButtonImg.alt = 'comment button';
 
     let negativeVotesCount = document.createElement('p');
@@ -138,7 +138,7 @@ export async function formatePost(postData: Post): Promise<HTMLDivElement> {
 
     let reportButtonImg = document.createElement('img');
     reportButtonImg.className = 'post-message-footer-button-img';
-    reportButtonImg.src = './public/report.svg';
+    reportButtonImg.src = './report.svg';
     reportButtonImg.alt = 'comment button';
 
 
