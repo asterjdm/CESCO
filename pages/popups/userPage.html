@@ -1,0 +1,33 @@
+<div id="userPage-popup" class="popup">
+    <div class="popup-content">
+
+        <button class="popup-content-close very special" onclick="closePopup('userPage-popup')"></button>
+
+        <div class="popup-content-center special">
+
+            <div class="popup-content-div">
+                <img id="profilePicture" class="popup-message-div-picture" src="./images/profileExample.png" alt="profile picture">
+
+                <div class="popup-message-div-infos">
+                    <p id="username">...</p>
+                    <p>...</p>
+                </div>
+
+                <button id="followButton" class="follow"></button>
+
+            </div>
+
+            <main class="popup-content-main">
+
+                <div id="userPagePosts" class="post-scroll inside">
+                    <!-- POSTS -->
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <input id="userPageId" style="display: none;" type="text">
+</div>
+
+<script src="script/userPage.js"></script>

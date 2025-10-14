@@ -1,8 +1,5 @@
-## CESCO
-
-# * In development, not available yet !*
-
-<!-- ⚠️ Right now, Cesco is only in french, but, in future updates, it will be multy-languages ⚠️
+# CESCO
+⚠️ Right now, Cesco is only in french, but, in future updates, it will be multy-languages ⚠️
 
 
 
@@ -34,4 +31,4 @@ git clone https://github.com/asterjdm/cesco.git cesco
 
 
 
-[![Star History Chart](https://api.star-history.com/svg?repos=asterjdm/CescoV2&type=Date)](https://star-history.com/#bytebase/star-history&Date) -->
+[![Star History Chart](https://api.star-history.com/svg?repos=asterjdm/CescoV2&type=Date)](https://star-history.com/#bytebase/star-history&Date)
