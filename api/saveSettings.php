@@ -86,11 +86,11 @@ if(isset($_FILES["profile_image"])){
     $fileExtension = "png";
     $uniqueFileName =  "pp_$userId." . $fileExtension;
 
-    $target_file = $_SERVER['DOCUMENT_ROOT'] . "/" . TARGET_UPLOAD_DIR . $uniqueFileName;
+    $target_file = $_SERVER['DOCUMENT_ROOT'] . "/" . TARGET_UPLOAD_PATH . $uniqueFileName;
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
     
-    $fileUrl = $fullDomain . "/" . TARGET_UPLOAD_DIR . $uniqueFileName;
+    $fileUrl = $fullDomain . "/" . TARGET_UPLOAD_PATH . $uniqueFileName;
 
     $check = getimagesize($profilePict["tmp_name"]);
 
